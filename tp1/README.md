@@ -1,12 +1,10 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T04G11
 
 ## TP 1 Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
+- In both exercises we observed how to add simple elements with toggle checkboxes to our scene.
+- The small triangle is not visible in the screenshot as it is overlapped by the big one.
 
-- In exercise 1 we observed X
-- In exercise 2 we had difficulties in Y
-
-![Screenshot 1](screenshots/cg-t0xgxx-tp1-n.png)
+![Screenshot 1](screenshots/CG-t04g11-tp1-1.png)
