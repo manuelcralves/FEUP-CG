@@ -3,8 +3,8 @@
 ## Group T0xG0y
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Fernando Rui Lopes de Lemos Pereira Rodrigues         | 201105620 | ...                | up201105620@up.pt
+| Manuel Carlos Ramos Alves         | 201906910 | up201906910@up.pt                |
 
 ----
 
