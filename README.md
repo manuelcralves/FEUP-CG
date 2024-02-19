@@ -1,9 +1,9 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T04G11
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| Fernando Rui Lopes de Lemos Pereira Rodrigues         | 201105620 | ...                | up201105620@up.pt
+| Fernando Rui Lopes de Lemos Pereira Rodrigues         | 201105620 | up201105620@up.pt                |
 | Manuel Carlos Ramos Alves         | 201906910 | up201906910@up.pt                |
 
 ----
