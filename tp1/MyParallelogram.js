@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 /**
  * MyParallelogram
  * @constructor
@@ -9,19 +9,21 @@ export class MyParallelogram extends CGFobject {
 		super(scene);
 		this.initBuffers();
 	}
-	
+
 	initBuffers() {
 		this.vertices = [
 			0, 0, 0,	//0
-    		1, 1, 0,	//1
+			1, 1, 0,	//1
 			2, 0, 0,	//2
 			3, 1, 0		//3
 		];
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
-			0, 2, 1,
-			1, 2, 3
+			0, 2, 1, //Face positiva
+			1, 2, 3,
+			1, 2, 0, //Face negativa
+			3, 2, 1
 		];
 
 		//The defined indices (and corresponding vertices)
