@@ -8,4 +8,6 @@
 
 ![Screenshot 1](tp2/screenshots/cg-t04g11-tp2-1.png) 
 
+- In the second exercise, we created a 3D cube, and used it as a base for the tangram, as we can observe in the picture below.
 
+![Screenshot 2](tp2/screenshots/cg-t04g11-tp2-2.png) 
