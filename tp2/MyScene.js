@@ -25,7 +25,6 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-
     this.tangram = new MyTangram(this);
 
     //Objects connected to MyInterface
