@@ -14,6 +14,7 @@ export class MyScene extends CGFscene {
   init(application) {
     super.init(application);
 
+
     this.initCameras();
     this.initLights();
 
