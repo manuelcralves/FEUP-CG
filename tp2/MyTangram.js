@@ -26,6 +26,7 @@ export class MyTangram extends CGFobject {
             0, 0, 1, 0,
             Math.SQRT2 - 1, Math.SQRT2, 0, 1
         ];
+
         // ---- BEGIN Primitive drawing section
         this.scene.pushMatrix()
         this.scene.multMatrix(translateDiamond);
