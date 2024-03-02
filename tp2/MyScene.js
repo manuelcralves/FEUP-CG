@@ -13,7 +13,7 @@ export class MyScene extends CGFscene {
   }
   init(application) {
     super.init(application);
-    
+
     this.initCameras();
     this.initLights();
 
@@ -97,12 +97,12 @@ export class MyScene extends CGFscene {
     this.multMatrix(sca);
 
     this.pushMatrix()
-    this.rotate(-Math.PI/2,1,0,0);
-    this.translate(4.5,-4.5,0);
+    this.rotate(-Math.PI / 2, 1, 0, 0);
+    this.translate(4.5, -4.5, 0);
 
     this.pushMatrix();
-    this.translate(0,0,-4.5);
-    this.scale(9,9,9);
+    this.translate(0, 0, -4.5);
+    this.scale(9, 9, 9);
     this.unitCubeQuad.display();
     this.popMatrix();
 
