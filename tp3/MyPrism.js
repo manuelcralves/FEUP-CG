@@ -22,7 +22,7 @@ export class MyPrism extends CGFobject {
         var ang = 0;
         var z = 0;
         var alphaAng = 2 * Math.PI / this.slices;
-        var deltaZ = 2 / this.stacks;
+        var deltaZ = 1 / this.stacks;
 
         // Generate vertices counter-clockwise from the X axis
         for (var stack = 0; stack <= this.stacks; stack++) {
