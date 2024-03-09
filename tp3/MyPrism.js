@@ -34,10 +34,25 @@ export class MyPrism extends CGFobject {
                 var ca = Math.cos(ang);
                 var caa = Math.cos(ang + alphaAng);
 
-                this.vertices.push(ca, sa, z); //First vertex of the slice 
-                this.normals.push(saa - sa, ca * saa - sa * caa, 0);  //Normal of the first vertex
+                this.vertices.push(ca, sa, z); //First vertex of the slice
                 this.vertices.push(caa, saa, z); //Second vertex of the slice
-                this.normals.push(saa - sa, ca * saa - sa * caa, 0);  //Normal of the second vertex
+
+                // Normal calculation
+                var normal = [(saa - sa) * deltaZ, -(caa - ca) * deltaZ, 0];
+
+                // Normalization
+                var nsize = Math.sqrt(
+                    normal[0] * normal[0] +
+                    normal[1] * normal[1] +
+                    normal[2] * normal[2]
+                );
+                normal[0] /= nsize;
+                normal[1] /= nsize;
+                normal[2] /= nsize;
+
+                // Normals of the new pair of vertices
+                this.normals.push(...normal);
+                this.normals.push(...normal);
 
                 ang += alphaAng;
             }

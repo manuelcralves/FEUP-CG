@@ -11,7 +11,8 @@
 ![Screenshot 1](tp3/screenshots/cg-t04g11-tp3-1.png) 
 ![Screenshot 1](tp3/screenshots/cg-t04g11-tp3-2.png)
 
-- In the second exercice we created a new prism class with dynamically generated vertices, indices and normals according to values supplied to the object constructor.
--
+- In the second exercice we created a new prism class with dynamically generated vertices, indices and normals according to values supplied to the object constructor for the number of slices and stacks.
+- It was not necessary to create a specific display function for the prism, nor to perform any transformations.
 
 ![Screenshot 3](tp3/screenshots/cg-t04g11-tp3-3.png)
+
