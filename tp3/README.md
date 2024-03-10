@@ -17,3 +17,7 @@
 - It was not necessary to create a specific display function for the prism, nor to perform any transformations.
 
 ![Screenshot 3](tp3/screenshots/cg-t04g11-tp3-3.png)
+
+- In the third exercise, we created a new class called MyCylinder, a copy of the MyPrism from the previous exercise, but we changed the normals in each vertex, in a way that the normal would be perpendicular to the surface of a perfect cylinder. With these changes, the surface of our cylinder became much more smoothed, comparing to the previous exercise.
+
+![Screenshot 4](tp3/screenshots/cg-t04g11-tp3-4.png)
