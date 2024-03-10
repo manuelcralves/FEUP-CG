@@ -89,9 +89,9 @@ export class MyUnitCube extends CGFobject {
 
             // Bottom face
             20, 11, 8,
-            23, 11, 20 
+            23, 11, 20
         ];
-        
+
 
         //The defined indices (and corresponding vertices)
         //will be read in groups of three to draw triangles
