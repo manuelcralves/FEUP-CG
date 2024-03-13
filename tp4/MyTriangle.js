@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 /**
  * MyTriangle
  * @constructor
@@ -11,7 +11,7 @@ export class MyTriangle extends CGFobject {
 		if (coords != undefined)
 			this.updateTexCoords(coords);
 	}
-	
+
 	initBuffers() {
 		this.vertices = [
 			-1, 1, 0,	//0
@@ -25,10 +25,9 @@ export class MyTriangle extends CGFobject {
 		];
 
 		this.texCoords = [
+			0, 0.5,
 			0, 1,
-			1, 1,
-			0, 0,
-			1, 0
+			0.5, 1,
 		]
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
@@ -37,14 +36,14 @@ export class MyTriangle extends CGFobject {
 		this.initGLBuffers();
 	}
 
-		/**
-	 * @method updateTexCoords
-	 * Updates the list of texture coordinates of the quad
-	 * @param {Array} coords - Array of texture coordinates
-	 */
-		updateTexCoords(coords) {
-			this.texCoords = [...coords];
-			this.updateTexCoordsGLBuffers();
-		}
+	/**
+ * @method updateTexCoords
+ * Updates the list of texture coordinates of the quad
+ * @param {Array} coords - Array of texture coordinates
+ */
+	updateTexCoords(coords) {
+		this.texCoords = [...coords];
+		this.updateTexCoordsGLBuffers();
+	}
 }
 
