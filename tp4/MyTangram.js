@@ -2,8 +2,10 @@ import { CGFobject, CGFappearance } from '../lib/CGF.js';
 import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyParallelogram } from "./MyParallelogram.js";
-import { MyTriangleBig } from "./MyTriangleBig.js";
-import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MyTriangleBigOrange } from "./MyTriangleBigOrange.js";
+import { MyTriangleBigBlue } from './MyTriangleBigBlue.js';
+import { MyTriangleSmallRed } from "./MyTriangleSmallRed.js";
+import { MyTriangleSmallPurple } from './MyTriangleSmallPurple.js';
 /**
  * MyTangram
  * @constructor
@@ -15,11 +17,13 @@ export class MyTangram extends CGFobject {
         this.diamond = new MyDiamond(scene);
         this.triangle = new MyTriangle(scene);
         this.parallelogram = new MyParallelogram(scene);
-        this.triangleSmall = new MyTriangleSmall(scene);
-        this.triangleBig = new MyTriangleBig(scene);
-        
+        this.triangleSmallRed = new MyTriangleSmallRed(scene);
+        this.triangleSmallPurple = new MyTriangleSmallPurple(scene);
+        this.triangleBigOrange = new MyTriangleBigOrange(scene);
+        this.triangleBigBlue = new MyTriangleBigBlue(scene);
+
         this.tangramMaterial = new CGFappearance(scene);
-        this.tangramMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.tangramMaterial.setAmbient(10, 10, 10, 1);
         this.tangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.tangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.tangramMaterial.setShininess(10.0);
@@ -53,29 +57,28 @@ export class MyTangram extends CGFobject {
         this.scene.translate(Math.SQRT2, -Math.SQRT2, 0)
         this.scene.rotate(Math.PI / 180 * 45, 0, 0, 1)
         this.tangramMaterial.apply();
-        this.triangleBig.display();
+        this.triangleBigOrange.display();
         this.scene.popMatrix()
 
         this.scene.pushMatrix()
         this.scene.translate(-Math.SQRT2, -Math.SQRT2, 0)
         this.scene.rotate(Math.PI / 180 * 225, 0, 0, 1)
         this.tangramMaterial.apply();
-        this.triangleBig.display();
+        this.triangleBigBlue.display();
         this.scene.popMatrix()
 
         this.scene.pushMatrix()
         this.scene.translate(3 / 2 * Math.SQRT2 - 2, Math.SQRT2 / 2 + Math.SQRT2, 0)
         this.scene.rotate(Math.PI / 180 * 45, 0, 0, 1)
         this.tangramMaterial.apply();
-        this.triangleSmall.display();
+        this.triangleSmallPurple.display();
         this.scene.popMatrix()
-
 
         this.scene.pushMatrix()
         this.scene.translate(Math.SQRT2 / 2, -Math.SQRT2 / 2 - Math.sqrt(8), 0)
         this.scene.rotate(Math.PI / 180 * 135, 0, 0, 1)
         this.tangramMaterial.apply();
-        this.triangleSmall.display();
+        this.triangleSmallRed.display();
         this.scene.popMatrix()
 
         this.scene.pushMatrix()

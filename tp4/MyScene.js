@@ -39,13 +39,13 @@ export class MyScene extends CGFscene {
         this.quadMaterial.loadTexture('images/default.png');
         this.quadMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.diamondMaterial = new CGFappearance(this);
-        this.diamondMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.diamondMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.diamondMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.diamondMaterial.setShininess(10.0);
-        this.diamondMaterial.loadTexture('images/tangram.png');
-        this.diamondMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        /*  this.diamondMaterial = new CGFappearance(this);
+            this.diamondMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+            this.diamondMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+            this.diamondMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+            this.diamondMaterial.setShininess(10.0);
+            this.diamondMaterial.loadTexture('images/tangram.png');
+            this.diamondMaterial.setTextureWrap('REPEAT', 'REPEAT'); */
         //------
 
         //------ Textures
@@ -59,7 +59,7 @@ export class MyScene extends CGFscene {
         this.displayQuad = true;
         //this.displayTangram = true;
         this.scaleFactor = 5;
-        this.selectedTexture = -1;        
+        this.selectedTexture = -1;
         this.wrapS = 0;
         this.wrapT = 0;
 
@@ -71,7 +71,7 @@ export class MyScene extends CGFscene {
         this.wrappingS = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
         this.wrappingT = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
 
-      }
+    }
 
     initLights() {
         this.lights[0].setPosition(5, 2, 5, 1);
@@ -107,7 +107,7 @@ export class MyScene extends CGFscene {
     }
 
     display() {
-  
+
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -128,15 +128,15 @@ export class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        
+
 
         // Default texture filtering in WebCGF is LINEAR. 
         // Uncomment next line for NEAREST when magnifying, or 
         // add a checkbox in the GUI to alternate in real time
-        
+
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
         if (this.displayQuad) {
-            this.quadMaterial.apply();    
+            this.quadMaterial.apply();
             this.quad.display();
         }
 
