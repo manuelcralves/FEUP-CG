@@ -1,7 +1,11 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPanorama } from "./MyPanorama.js";
+import { MyPetal } from "./MyPetal.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyReceptacle } from "./MyReceptacle.js";
 import { MySphere } from "./MySphere.js";
+import { MyStem } from "./MyStem.js";
+import { MyFlower } from "./MyFlower.js";
 
 /**
  * MyScene
@@ -38,6 +42,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 100, 50);
     this.panorama = new MyPanorama(this, this.panoramaTex);
+    this.flower = new MyFlower(this); 
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -102,6 +107,8 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     this.popMatrix();*/
 
     this.panorama.display();
+
+    this.flower.display();
 
     // ---- END Primitive drawing section
   }
