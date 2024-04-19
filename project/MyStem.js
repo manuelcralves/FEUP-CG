@@ -1,49 +1,22 @@
 import { CGFobject, CGFappearance } from '../../lib/CGF.js';
+import { MyCylinder } from './MyCylinder.js';
 
 export class MyStem extends CGFobject {
-    constructor(scene, slices, stacks, r, g, b) {
+    constructor(scene,slices, stacks, height, r, g, b) {
         super(scene);
-        this.slices = slices;
-        this.stacks = stacks;
+        this.height = height;
         this.r = r;
         this.g = g;
         this.b = b;
+        this.slices = slices;
+        this.stacks = stacks;
 
-        this.initBuffers();
-        this.initAppearance();
-    }
-
-    initBuffers() {
-        this.vertices = [];
-        this.indices = [];
-        this.normals = [];
-
-        var alphaAng = 2 * Math.PI / this.slices;
-        var deltaZ = 5 / this.stacks;
-
-        for (var stack = 0; stack <= this.stacks; stack++) {
-            var z = stack * deltaZ;
-            for (var slice = 0; slice < this.slices; slice++) {
-                var ang = slice * alphaAng;
-
-                var sa = Math.sin(ang);
-                var ca = Math.cos(ang);
-
-                this.vertices.push(ca, sa, z);
-                this.normals.push(ca, sa, 0);
-
-                if (stack < this.stacks) {
-                    var nextStack = stack + 1;
-                    var nextSlice = (slice + 1) % this.slices;
-
-                    this.indices.push(stack * this.slices + slice, stack * this.slices + nextSlice, nextStack * this.slices + slice);
-                    this.indices.push(nextStack * this.slices + slice, stack * this.slices + nextSlice, nextStack * this.slices + nextSlice);
-                }
-            }
+        this.cylinders = [];
+        for (let i = 0; i < this.height; i++) {
+            this.cylinders.push(new MyCylinder(this.scene, this.slices, this.stacks));
         }
 
-        this.primitiveType = this.scene.gl.TRIANGLES;
-        this.initGLBuffers();
+        this.initAppearance();
     }
 
     initAppearance() {
@@ -56,6 +29,11 @@ export class MyStem extends CGFobject {
 
     display() {
         this.appearance.apply();
-        super.display();
-    }
+        for (let i = 0; i < this.height; i++) {
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0, i); 
+            this.cylinders[i].display();
+            this.scene.popMatrix();
+        }
+}
 }

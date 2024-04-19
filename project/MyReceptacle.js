@@ -28,7 +28,6 @@ export class MyReceptacle extends CGFobject {
     this.appearance.apply();
 
     this.scene.pushMatrix();
-    this.scene.scale(1,0.5,1);
     this.receptacle.display();
     this.scene.popMatrix();
   }
