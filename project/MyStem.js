@@ -6,12 +6,7 @@ export class MyStem extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.initBuffers();
-
-        this.material = new CGFappearance(scene);
-        this.material.setAmbient(0.0, 1.0, 0.0, 1.0);
-        this.material.setDiffuse(0.0, 1.0, 0.0, 1.0);
-        this.material.setSpecular(0.0, 1.0, 0.0, 1.0);
-        this.material.setShininess(10.0);
+        this.initAppearance();
     }
 
     initBuffers() {
@@ -47,14 +42,16 @@ export class MyStem extends CGFobject {
         this.initGLBuffers();
     }
 
-    updateBuffers(complexity) {
-        this.slices = 3 + Math.round(9 * complexity);
-        this.initBuffers();
-        this.initNormalVizBuffers();
-    }
+    initAppearance() {
+        this.appearance = new CGFappearance(this.scene);
+        this.appearance.setAmbient(0.0, 1.0, 0.0, 1.0);
+        this.appearance.setDiffuse(0.0, 1.0, 0.0, 1.0);
+        this.appearance.setSpecular(0.0, 1.0, 0.0, 1.0);
+        this.appearance.setShininess(10.0);
+      }
 
     display() {
-        this.material.apply();
+        this.appearance.apply();
         super.display();
     }
 }

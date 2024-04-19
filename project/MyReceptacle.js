@@ -16,12 +16,13 @@ export class MyReceptacle extends CGFobject {
 
   initAppearance() {
     this.appearance = new CGFappearance(this.scene);
-    this.appearance.setAmbient(1.0, 1.0, 0.0, 1.0); // yellow color
-    this.appearance.setDiffuse(1.0, 1.0, 0.0, 1.0); // yellow color
+    this.appearance.setAmbient(1.0, 1.0, 0.0, 1.0); 
+    this.appearance.setDiffuse(1.0, 1.0, 0.0, 1.0); 
   }
 
   display() {
     this.appearance.apply();
+    
     this.scene.pushMatrix();
     this.scene.scale(3,3,3);
     this.receptacle.display();

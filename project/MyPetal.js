@@ -24,10 +24,12 @@ export class MyPetal extends CGFobject {
     this.appearance.apply();
     
     this.scene.pushMatrix();
+    this.scene.translate(2,2,0)
     this.petal.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
+    this.scene.translate(2,2,0)
     this.scene.scale(-1,-1, 1);
     this.petal.display();
     this.scene.popMatrix();
