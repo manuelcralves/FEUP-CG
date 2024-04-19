@@ -1,5 +1,5 @@
 import { CGFobject, CGFappearance } from '../../lib/CGF.js';
-import { MyCylinder } from './MyCylinder.js';
+import { MyCylinder } from '../primitives/MyCylinder.js';
 
 export class MyStem extends CGFobject {
     constructor(scene,slices, stacks, height, r, g, b) {

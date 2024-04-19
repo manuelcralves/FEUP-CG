@@ -1,11 +1,11 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
-import { MyPanorama } from "./MyPanorama.js";
-import { MyPetal } from "./MyPetal.js";
+import { MyPanorama } from "./objects/MyPanorama.js";
+import { MyPetal } from "./objects/MyPetal.js";
 import { MyPlane } from "./MyPlane.js";
-import { MyReceptacle } from "./MyReceptacle.js";
-import { MySphere } from "./MySphere.js";
-import { MyStem } from "./MyStem.js";
-import { MyFlower } from "./MyFlower.js";
+import { MyReceptacle } from "./objects/MyReceptacle.js";
+import { MySphere } from "./primitives/MySphere.js";
+import { MyStem } from "./objects/MyStem.js";
+import { MyFlower } from "./objects/MyFlower.js";
 
 /**
  * MyScene

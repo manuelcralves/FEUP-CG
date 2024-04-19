@@ -2,7 +2,7 @@ import { CGFobject, CGFappearance } from '../../lib/CGF.js';
 import { MyStem } from './MyStem.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyPetal } from './MyPetal.js';
-import { MyCircle } from './MyCircle.js';
+import { MyCircle } from '../primitives/MyCircle.js';
 
 export class MyFlower extends CGFobject {
   
@@ -61,7 +61,5 @@ export class MyFlower extends CGFobject {
     this.petal.display();
     this.scene.popMatrix();
 }
-
-  this.circle.display();
 }
 }
