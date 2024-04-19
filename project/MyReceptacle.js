@@ -3,8 +3,12 @@ import { MySphere } from './MySphere.js';
 
 export class MyReceptacle extends CGFobject {
   
-  constructor(scene) {
+  constructor(scene, r, g, b) {
     super(scene);
+
+    this.r = r;
+    this.g = g;
+    this.b = b;
 
     this.initBuffers();
     this.initAppearance();
@@ -16,15 +20,15 @@ export class MyReceptacle extends CGFobject {
 
   initAppearance() {
     this.appearance = new CGFappearance(this.scene);
-    this.appearance.setAmbient(1.0, 1.0, 0.0, 1.0); 
-    this.appearance.setDiffuse(1.0, 1.0, 0.0, 1.0); 
+    this.appearance.setAmbient(this.r, this.g, this.b, 1.0); 
+    this.appearance.setDiffuse(this.r, this.g, this.b, 1.0); 
   }
 
   display() {
     this.appearance.apply();
-    
+
     this.scene.pushMatrix();
-    this.scene.scale(3,3,3);
+    this.scene.scale(1,0.5,1);
     this.receptacle.display();
     this.scene.popMatrix();
   }

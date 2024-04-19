@@ -1,10 +1,14 @@
 import { CGFobject, CGFappearance } from '../../lib/CGF.js';
 
 export class MyStem extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices, stacks, r, g, b) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+
         this.initBuffers();
         this.initAppearance();
     }
@@ -44,9 +48,9 @@ export class MyStem extends CGFobject {
 
     initAppearance() {
         this.appearance = new CGFappearance(this.scene);
-        this.appearance.setAmbient(0.0, 1.0, 0.0, 1.0);
-        this.appearance.setDiffuse(0.0, 1.0, 0.0, 1.0);
-        this.appearance.setSpecular(0.0, 1.0, 0.0, 1.0);
+        this.appearance.setAmbient(this.r, this.g, this.b, 1.0);
+        this.appearance.setDiffuse(this.r, this.g, this.b, 1.0);
+        this.appearance.setSpecular(this.r, this.g, this.b, 1.0);
         this.appearance.setShininess(10.0);
       }
 
