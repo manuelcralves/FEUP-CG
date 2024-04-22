@@ -3,18 +3,19 @@ import { MyTriangle } from '../primitives/MyTriangle.js';
 
 export class MyPetal extends CGFobject {
   
-  constructor(scene, r, g, b) {
+  constructor(scene, r, g, b, angle) {
     super(scene);
     this.r = r;
     this.g = g;
     this.b = b;
+    this.angle = angle;
 
     this.initBuffers();
     this.initAppearance();
   }
 
   initBuffers() {
-    this.petal = new MyTriangle(this.scene); 
+    this.traingle = new MyTriangle(this.scene); 
   }
 
   initAppearance() {
@@ -24,17 +25,18 @@ export class MyPetal extends CGFobject {
   }
 
   display() {
-    this.appearance.apply();
-    
-    this.scene.pushMatrix();
-    this.scene.translate(2,2,0)
-    this.petal.display();
-    this.scene.popMatrix();
+  this.appearance.apply();
+  
+  this.scene.pushMatrix();
+  this.scene.translate(2,2,0); 
+  this.traingle.display();
+  this.scene.popMatrix();
 
-    this.scene.pushMatrix();
-    this.scene.translate(2,2,0)
-    this.scene.scale(-1,-1, 1);
-    this.petal.display();
-    this.scene.popMatrix();
-  }
+  this.scene.pushMatrix();
+  this.scene.translate(2,2,0); 
+  this.scene.rotate(this.angle, -1, 1, 0);
+  this.scene.rotate(Math.PI, 1, -1, 0);
+  this.traingle.display();
+  this.scene.popMatrix();
+}
 }

@@ -6,8 +6,7 @@ import { MyCircle } from '../primitives/MyCircle.js';
 
 export class MyFlower extends CGFobject {
   
-  constructor(scene, radiusFlower, numPetals, [rPetal, gPetal, bPetal], radiusReceptacle, [rReceptacle, gReceptacle, bReceptacle], radiusStem, heightStem, [rStem, gStem, bStem], [rLeaf, gLeaf, bLeaf]) {
-    //scene, radiusFlower, numPetals, [rPetal, gPetal, bPetal], radiusReceptacle, [rReceptacle, gReceptacle, bReceptacle], radiusStem, heightStem, [rStem, gStem, bStem], [rLeaf, gLeaf, bLeaf]
+  constructor(scene, radiusFlower, numPetals, [rPetal, gPetal, bPetal], radiusReceptacle, [rReceptacle, gReceptacle, bReceptacle], radiusStem, heightStem, [rStem, gStem, bStem], [rLeaf, gLeaf, bLeaf], minTilt, maxTilt) {
     super(scene);
     this.radiusFlower = radiusFlower;
     this.numPetals = numPetals;
@@ -26,6 +25,7 @@ export class MyFlower extends CGFobject {
     this.rLeaf = rLeaf;
     this.gLeaf = gLeaf;
     this.bLeaf = bLeaf;
+    this.tilt = Math.random() * (maxTilt - minTilt) + minTilt;
 
     this.initBuffers();
   }
@@ -33,7 +33,11 @@ export class MyFlower extends CGFobject {
   initBuffers() {
     this.receptacle = new MyReceptacle(this.scene, this.rReceptacle, this.gReceptacle, this.bReceptacle);
     this.stem = new MyStem(this.scene, 100, 50, this.heightStem, this.rStem, this.gStem, this.bStem);
-    this.petal = new MyPetal(this.scene, this.rPetal, this.gPetal, this.bPetal);
+    this.petals = [];
+    for(let i = 0; i < this.numPetals; i++) {
+      const angle = Math.random() * (Math.PI/4);
+      this.petals.push(new MyPetal(this.scene, this.rPetal, this.gPetal, this.bPetal, angle, -Math.PI/6, Math.PI/6));
+    }
     this.circle = new MyCircle(this.scene, 100, this.radiusFlower);
   }
 
@@ -55,11 +59,12 @@ export class MyFlower extends CGFobject {
   for(let i = 0; i < this.numPetals; i++) {
     this.scene.pushMatrix();
     this.scene.translate(this.radiusReceptacle-1, this.heightStem + this.radiusReceptacle/2, 0); 
+    this.scene.rotate(this.tilt, 0, 0, 1);
     this.scene.rotate(i * 2 * Math.PI / this.numPetals, 0, 1, 0);
     this.scene.scale(petalScaleFactor, petalScaleFactor, petalScaleFactor);
     this.scene.rotate(Math.PI / 2, 1, 0, 0);
-    this.petal.display();
+    this.petals[i].display(); 
     this.scene.popMatrix();
-}
+  }
 }
 }

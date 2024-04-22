@@ -12,8 +12,15 @@ export class MyStem extends CGFobject {
         this.stacks = stacks;
 
         this.cylinders = [];
+
+        this.rotationAngles = []; 
+        const minAngle = 0; // Adjust this to change the direction of inclination
+        const maxAngle = Math.PI/32; 
+
         for (let i = 0; i < this.height; i++) {
             this.cylinders.push(new MyCylinder(this.scene, this.slices, this.stacks));
+            let angle = Math.random() * (maxAngle - minAngle) + minAngle;
+            this.rotationAngles.push(angle);
         }
 
         this.initAppearance();
@@ -31,6 +38,7 @@ export class MyStem extends CGFobject {
         this.appearance.apply();
         for (let i = 0; i < this.height; i++) {
             this.scene.pushMatrix();
+            this.scene.rotate(this.rotationAngles[i], 0, 1, 0); 
             this.scene.translate(0, 0, i); 
             this.cylinders[i].display();
             this.scene.popMatrix();
