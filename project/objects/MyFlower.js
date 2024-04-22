@@ -3,6 +3,7 @@ import { MyStem } from './MyStem.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyPetal } from './MyPetal.js';
 import { MyCircle } from '../primitives/MyCircle.js';
+import { MyLeaf } from './MyLeaf.js';
 
 export class MyFlower extends CGFobject {
   
@@ -39,10 +40,11 @@ export class MyFlower extends CGFobject {
       this.petals.push(new MyPetal(this.scene, this.rPetal, this.gPetal, this.bPetal, angle, -Math.PI/6, Math.PI/6));
     }
     this.circle = new MyCircle(this.scene, 100, this.radiusFlower);
+    this.leaf = new MyLeaf(this.scene);
   }
 
   display() {
-  this.scene.pushMatrix();
+  /*this.scene.pushMatrix();
   this.scene.translate(0,this.heightStem + this.radiusReceptacle/2,0);
   this.scene.scale(this.radiusReceptacle,this.radiusReceptacle,this.radiusReceptacle);
   this.receptacle.display();
@@ -65,6 +67,7 @@ export class MyFlower extends CGFobject {
     this.scene.rotate(Math.PI / 2, 1, 0, 0);
     this.petals[i].display(); 
     this.scene.popMatrix();
-  }
+  }*/
+  this.leaf.display();
 }
 }
