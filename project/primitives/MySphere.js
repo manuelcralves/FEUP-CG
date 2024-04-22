@@ -1,11 +1,14 @@
 import { CGFobject } from '../../lib/CGF.js';
 
 export class MySphere extends CGFobject {
-  constructor(scene, slices, stacks, inverted = false) {
+  constructor(scene, slices, stacks, inverted = false, min, max, variable =false) {
     super(scene);
     this.stacks = stacks * 2; 
     this.slices = slices; 
     this.inverted = inverted;
+    this.variable = variable;
+    this.min = min;
+    this.max = max;
 
     this.initBuffers();
   }
@@ -30,7 +33,7 @@ export class MySphere extends CGFobject {
         this.addTexCoord(latitude, longitude);
       }
     }
-
+console.log("vertices number" + this.vertices.length)/3;
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
   }
@@ -39,7 +42,10 @@ export class MySphere extends CGFobject {
     const x = Math.cos(theta) * Math.sin(alpha);
     const y = Math.cos(alpha);
     const z = Math.sin(-theta) * Math.sin(alpha);
-    this.vertices.push(x, y, z);
+    this.vertices.push(
+      this.variable ? x+Math.random()*(this.max-this.min) : x,
+      this.variable ? y+Math.random()*(this.max-this.min) : y,
+      this.variable ? z+Math.random()*(this.max-this.min) : z);
   }
 
   addIndices(latitude, longitude) {
