@@ -7,6 +7,7 @@ import { MySphere } from "./primitives/MySphere.js";
 import { MyStem } from "./objects/MyStem.js";
 import { MyFlower } from "./objects/MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
+import { MyBee } from "./objects/MyBee.js";
 
 /**
  * MyScene
@@ -50,6 +51,7 @@ export class MyScene extends CGFscene {
     //let radius = Math.random() * (7 - 3) + 3;
     //this.flower = new MyFlower(this, radius, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
     this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
+    this.bee = new MyBee(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -85,6 +87,11 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
+
+    this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA)
+
+    this.gl.enable(this.gl.BLEND)
+
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -115,7 +122,9 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     this.panorama.display();
 
-    this.garden.display();
+    this.bee.display();
+
+    //this.garden.display();
 
     //this.flower.display();
 
