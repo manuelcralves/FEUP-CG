@@ -3,7 +3,6 @@ import { MyStem } from './MyStem.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyPetal } from './MyPetal.js';
 import { MyCircle } from '../primitives/MyCircle.js';
-import { MyLeaf } from './MyLeaf.js';
 
 export class MyFlower extends CGFobject {
   
@@ -33,7 +32,7 @@ export class MyFlower extends CGFobject {
 
   initBuffers() {
     this.receptacle = new MyReceptacle(this.scene, this.rReceptacle, this.gReceptacle, this.bReceptacle);
-    this.stem = new MyStem(this.scene, 100, 50, this.heightStem, this.rStem, this.gStem, this.bStem, this.radiusStem);
+    this.stem = new MyStem(this.scene, 100, 50, this.heightStem, this.rStem, this.gStem, this.bStem, this.radiusStem, this.rLeaf, this.gLeaf, this.bLeaf);
     this.petals = [];
     for(let i = 0; i < this.numPetals; i++) {
       const angle = Math.random() * (Math.PI/4);
@@ -59,7 +58,7 @@ export class MyFlower extends CGFobject {
     this.scene.pushMatrix();
     this.scene.translate(this.radiusReceptacle-1, this.heightStem + this.radiusReceptacle/2, 0); 
     this.scene.rotate(this.tilt, 0, 0, 1);
-    this.scene.rotate(i * 2 * Math.PI / this.numPetals, 0, 1, 0);
+    this.scene.rotate(i* 2 * Math.PI / this.numPetals, 0, 1, 0);
     this.scene.scale(petalScaleFactor, petalScaleFactor, petalScaleFactor);
     this.scene.rotate(Math.PI / 2, 1, 0, 0);
     this.petals[i].display(); 

@@ -6,6 +6,7 @@ import { MyReceptacle } from "./objects/MyReceptacle.js";
 import { MySphere } from "./primitives/MySphere.js";
 import { MyStem } from "./objects/MyStem.js";
 import { MyFlower } from "./objects/MyFlower.js";
+import { MyGarden } from "./MyGarden.js";
 
 /**
  * MyScene
@@ -37,13 +38,17 @@ export class MyScene extends CGFscene {
 
     this.panoramaTex = new CGFtexture(this, 'images/panorama1.jpg');
 
+    this.numRows = 5; 
+    this.numCols = 5; 
+
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 100, 50);
     this.panorama = new MyPanorama(this, this.panoramaTex);
-    let radius = Math.random() * (7 - 3) + 3;
-    this.flower = new MyFlower(this, radius, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
+    //let radius = Math.random() * (7 - 3) + 3;
+    //this.flower = new MyFlower(this, radius, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
+    this.garden = new MyGarden(this, this.numRows, this.numCols);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -109,7 +114,9 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     this.panorama.display();
 
-    this.flower.display();
+    this.garden.display();
+
+    //this.flower.display();
 
     // ---- END Primitive drawing section
   }

@@ -3,12 +3,15 @@ import { MyCylinder } from '../primitives/MyCylinder.js';
 import { MyLeaf } from './MyLeaf.js';
 
 export class MyStem extends CGFobject {
-    constructor(scene,slices, stacks, height, r, g, b, radiusStem) {
+    constructor(scene,slices, stacks, height, r, g, b, radiusStem, rLeaf, gLeaf, bLeaf) {
         super(scene);
         this.height = height;
         this.r = r;
         this.g = g;
         this.b = b;
+        this.rLeaf = rLeaf;
+        this.gLeaf = gLeaf;
+        this.bLeaf = bLeaf;
         this.slices = slices;
         this.stacks = stacks;
         this.radiusStem = radiusStem;
@@ -16,8 +19,8 @@ export class MyStem extends CGFobject {
         this.cylinders = [];
 
         this.rotationAngles = []; 
-        const minAngle = -Math.PI/64; // Adjust this to change the direction of inclination
-        const maxAngle = Math.PI/64; 
+        const minAngle = -Math.PI/128; // Adjust this to change the direction of inclination
+        const maxAngle = Math.PI/128; 
 
         this.rotationLeaves = []; 
         const minAngleLeaves = 0; // Adjust this to change the direction of inclination
@@ -30,7 +33,7 @@ export class MyStem extends CGFobject {
 
         let lastAngle = 0; // Initialize last angle to 0
 
-        this.leaf = new MyLeaf(this.scene, [0.0, 1.0, 0.0], [0.0, 0.3, 0.0]);
+        this.leaf = new MyLeaf(this.scene, [this.r, this.g, this.b], [this.rLeaf, this.gLeaf, this.bLeaf]);
 
         for (let i = 0; i < this.height; i++) {
             this.cylinders.push(new MyCylinder(this.scene, this.slices, this.stacks));
