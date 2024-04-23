@@ -7,6 +7,11 @@ export class MyBee extends CGFobject {
   constructor(scene) {
     super(scene);
 
+    this.offsetBee = 0;
+    this.offsetWing = 0;
+    this.velocityBee = 0.005;
+    this.velocityWing = 0.025;
+
     this.initBuffers();
     this.initAppearance();
   }
@@ -62,6 +67,7 @@ export class MyBee extends CGFobject {
   display() {
     //Body
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.bodyAppearance.apply();
     this.scene.scale(2.5,1.5,1.5);
@@ -71,6 +77,7 @@ export class MyBee extends CGFobject {
 
     //Head
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.headAppearance.apply();
     this.scene.translate(-3,0.5,0);
@@ -82,6 +89,7 @@ export class MyBee extends CGFobject {
 
     //LEFT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.antennaAppearance.apply();
     this.scene.translate(-3.5,1.5,0.5);
@@ -94,6 +102,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.antennaAppearance.apply();
     this.scene.translate(-3.5,1.5,-0.5);
@@ -108,6 +117,7 @@ export class MyBee extends CGFobject {
 
     //LEFT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.antennaTopAppearance.apply();
     this.scene.translate(-4.15,2.65,1.25);
@@ -119,6 +129,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.antennaTopAppearance.apply();
     this.scene.translate(-4.15,2.65,-1.25);
@@ -132,6 +143,7 @@ export class MyBee extends CGFobject {
 
     //LEFT FRONT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(-1,0,1);
@@ -142,6 +154,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT FRONT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(-1,0,-1);
@@ -152,6 +165,7 @@ export class MyBee extends CGFobject {
 
     //LEFT MIDDLE
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(0,0,1);
@@ -162,6 +176,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT MIDDLE
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(0,0,-1);
@@ -172,6 +187,7 @@ export class MyBee extends CGFobject {
 
     //LEFT BACK
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(1,0,1);
@@ -182,6 +198,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT BACK
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(1,0,-1);
@@ -194,6 +211,7 @@ export class MyBee extends CGFobject {
 
     //LEFT FRONT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(-1,0-1.5*Math.sin(Math.PI/6),1+1.5*Math.cos(Math.PI/6));
@@ -204,6 +222,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT FRONT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(-1,0-1.5*Math.sin(5*Math.PI/6),-1+1.5*Math.cos(5*Math.PI/6));
@@ -214,6 +233,7 @@ export class MyBee extends CGFobject {
 
     //LEFT MIDDLE
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(0,0-1.5*Math.sin(Math.PI/6),1+1.5*Math.cos(Math.PI/6));
@@ -224,6 +244,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT MIDDLE
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(0,0-1.5*Math.sin(5*Math.PI/6),-1+1.5*Math.cos(5*Math.PI/6));
@@ -234,6 +255,7 @@ export class MyBee extends CGFobject {
 
     //LEFT BACK
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(1,0-1.5*Math.sin(Math.PI/6),1+1.5*Math.cos(Math.PI/6));
@@ -244,6 +266,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT BACK
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footAppearance.apply();
     this.scene.translate(1,0-1.5*Math.sin(5*Math.PI/6),-1+1.5*Math.cos(5*Math.PI/6));
@@ -256,6 +279,7 @@ export class MyBee extends CGFobject {
 
     //LEFT FRONT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footJointAppearance.apply();
     this.scene.translate(-1,0-1.5*Math.sin(Math.PI/6),1+1.5*Math.cos(Math.PI/6));
@@ -266,6 +290,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT FRONT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footJointAppearance.apply();
     this.scene.translate(-1,0-1.5*Math.sin(5*Math.PI/6),-1+1.5*Math.cos(5*Math.PI/6));
@@ -276,6 +301,7 @@ export class MyBee extends CGFobject {
 
     //LEFT MIDDLE
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footJointAppearance.apply();
     this.scene.translate(0,0-1.5*Math.sin(Math.PI/6),1+1.5*Math.cos(Math.PI/6));
@@ -286,6 +312,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT MIDDLE
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footJointAppearance.apply();
     this.scene.translate(0,0-1.5*Math.sin(5*Math.PI/6),-1+1.5*Math.cos(5*Math.PI/6));
@@ -296,6 +323,7 @@ export class MyBee extends CGFobject {
 
     //LEFT BACK
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footJointAppearance.apply();
     this.scene.translate(1,0-1.5*Math.sin(Math.PI/6),1+1.5*Math.cos(Math.PI/6));
@@ -306,6 +334,7 @@ export class MyBee extends CGFobject {
 
     //RIGHT BACK
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.footJointAppearance.apply();
     this.scene.translate(1,0-1.5*Math.sin(5*Math.PI/6),-1+1.5*Math.cos(5*Math.PI/6));
@@ -318,42 +347,51 @@ export class MyBee extends CGFobject {
 
     //LEFT FRONT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.wingAppearance.apply();
     this.scene.translate(-0.25,2,-1);
-    this.scene.rotate(Math.PI/4,1,0,0);
+    this.scene.rotate(Math.PI/4 + Math.sin(this.offsetWing)/8,1,0,0); 
     this.scene.scale(0.5,1,1);
     this.wing.display();
     this.scene.popMatrix();
 
     //RIGHT FRONT
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.wingAppearance.apply();
     this.scene.translate(-0.25,2,1);
-    this.scene.rotate(3*Math.PI/4,1,0,0);
+    this.scene.rotate(3*Math.PI/4 - Math.sin(this.offsetWing)/8,1,0,0); 
     this.scene.scale(0.5,1,1);
     this.wing.display();
     this.scene.popMatrix();
 
     //LEFT BACK
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.wingAppearance.apply();
     this.scene.translate(0.25,1.75,-1);
-    this.scene.rotate(Math.PI/4,1,0,0);
+    this.scene.rotate(Math.PI/4 + Math.sin(this.offsetWing)/8,1,0,0); 
     this.scene.scale(0.3,0.7,0.7);
     this.wing.display();
     this.scene.popMatrix();
 
     //RIGHT BACK
     this.scene.pushMatrix();
+    this.scene.translate(0, Math.sin(this.offsetBee)/2 ,0);
     this.scene.scale(0.25,0.25,0.25);
     this.wingAppearance.apply();
     this.scene.translate(0.25,1.75,1);
-    this.scene.rotate(3*Math.PI/4,1,0,0);
+    this.scene.rotate(3*Math.PI/4 - Math.sin(this.offsetWing)/8,1,0,0); 
     this.scene.scale(0.3,0.7,0.7);
     this.wing.display();
     this.scene.popMatrix();
+  }
+
+  update(t){
+    this.offsetBee += this.velocityBee * t;
+    this.offsetWing += this.velocityWing * t;
   }
 }
