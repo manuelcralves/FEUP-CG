@@ -15,7 +15,7 @@ export class MyPetal extends CGFobject {
   }
 
   initBuffers() {
-    this.traingle = new MyTriangle(this.scene); 
+    this.triangle = new MyTriangle(this.scene); 
   }
 
   initAppearance() {
@@ -33,14 +33,14 @@ export class MyPetal extends CGFobject {
   
   this.scene.pushMatrix();
   this.scene.translate(2,2,0); 
-  this.traingle.display();
+  this.triangle.display();
   this.scene.popMatrix();
 
   this.scene.pushMatrix();
   this.scene.translate(2,2,0); 
   this.scene.rotate(this.angle, -1, 1, 0);
   this.scene.rotate(Math.PI, 1, -1, 0);
-  this.traingle.display();
+  this.triangle.display();
   this.scene.popMatrix();
 }
 }
