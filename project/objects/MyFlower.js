@@ -33,26 +33,23 @@ export class MyFlower extends CGFobject {
 
   initBuffers() {
     this.receptacle = new MyReceptacle(this.scene, this.rReceptacle, this.gReceptacle, this.bReceptacle);
-    this.stem = new MyStem(this.scene, 100, 50, this.heightStem, this.rStem, this.gStem, this.bStem);
+    this.stem = new MyStem(this.scene, 100, 50, this.heightStem, this.rStem, this.gStem, this.bStem, this.radiusStem);
     this.petals = [];
     for(let i = 0; i < this.numPetals; i++) {
       const angle = Math.random() * (Math.PI/4);
       this.petals.push(new MyPetal(this.scene, this.rPetal, this.gPetal, this.bPetal, angle, -Math.PI/6, Math.PI/6));
     }
     this.circle = new MyCircle(this.scene, 100, this.radiusFlower);
-    this.leaf = new MyLeaf(this.scene);
   }
 
   display() {
-  /*this.scene.pushMatrix();
+  this.scene.pushMatrix();
   this.scene.translate(0,this.heightStem + this.radiusReceptacle/2,0);
   this.scene.scale(this.radiusReceptacle,this.radiusReceptacle,this.radiusReceptacle);
   this.receptacle.display();
   this.scene.popMatrix();
 
   this.scene.pushMatrix();
-  this.scene.rotate(-Math.PI/2 ,1,0,0);
-  this.scene.scale(this.radiusStem,this.radiusStem,1);
   this.stem.display();
   this.scene.popMatrix();
 
@@ -67,7 +64,6 @@ export class MyFlower extends CGFobject {
     this.scene.rotate(Math.PI / 2, 1, 0, 0);
     this.petals[i].display(); 
     this.scene.popMatrix();
-  }*/
-  this.leaf.display();
+  }
 }
 }

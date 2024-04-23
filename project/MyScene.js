@@ -42,7 +42,8 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 100, 50);
     this.panorama = new MyPanorama(this, this.panoramaTex);
-    this.flower = new MyFlower(this, 5, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
+    let radius = Math.random() * (7 - 3) + 3;
+    this.flower = new MyFlower(this, radius, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
 
     //Objects connected to MyInterface
     this.displayAxis = true;
