@@ -38,8 +38,9 @@ export class MyScene extends CGFscene {
 
     this.panoramaTex = new CGFtexture(this, 'images/panorama1.jpg');
 
-    this.numRows = 5; 
-    this.numCols = 5; 
+    this.numRows = 1; 
+    this.numCols = 1; 
+    this.spacing = 1;
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -48,7 +49,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panoramaTex);
     //let radius = Math.random() * (7 - 3) + 3;
     //this.flower = new MyFlower(this, radius, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
-    this.garden = new MyGarden(this, this.numRows, this.numCols);
+    this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -119,5 +120,8 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     //this.flower.display();
 
     // ---- END Primitive drawing section
+  }
+  updateGarden() {
+      this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
   }
 }

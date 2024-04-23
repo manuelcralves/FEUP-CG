@@ -23,8 +23,21 @@ export class MyInterface extends CGFinterface {
         //Slider element in GUI
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
-        this.gui.add(this.scene, 'numRows', 1, 10).step(1).name('Number of Rows');
-        this.gui.add(this.scene, 'numCols', 1, 10).step(1).name('Number of Columns');
+        let controllerRows = this.gui.add(this.scene, 'numRows', 1, 10).step(1).name('Number of Rows');
+        let controllerCols = this.gui.add(this.scene, 'numCols', 1, 10).step(1).name('Number of Columns');
+        let controllerSpacing = this.gui.add(this.scene, 'spacing', 1, 10).step(1).name('Spacing');
+
+        controllerRows.onChange(() => {
+            this.scene.updateGarden();
+        });
+
+        controllerCols.onChange(() => {
+            this.scene.updateGarden();
+        });
+
+        controllerSpacing.onChange(() => {
+            this.scene.updateGarden();
+        });
 
         return true;
     }

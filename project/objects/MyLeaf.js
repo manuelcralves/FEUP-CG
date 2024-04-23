@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
 import { MyCylinder } from '../primitives/MyCylinder.js';
 import { MyTriangle } from '../primitives/MyTriangle.js';
 
@@ -29,6 +29,14 @@ export class MyLeaf extends CGFobject {
         this.triangleAppearance.setAmbient(this.rTriangle, this.gTriangle, this.bTriangle, 1);
         this.triangleAppearance.setDiffuse(this.rTriangle, this.gTriangle, this.bTriangle, 1);
         this.triangleAppearance.setSpecular(this.rTriangle, this.gTriangle, this.bTriangle, 1);
+
+        this.cylinderTexture = new CGFtexture(this.scene, 'images/stem.jpg');
+        this.cylinderAppearance.setTexture(this.cylinderTexture);
+        this.cylinderAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+
+        this.triangleTexture = new CGFtexture(this.scene, 'images/leaf.jpg');
+        this.triangleAppearance.setTexture(this.triangleTexture);
+        this.triangleAppearance.setTextureWrap('REPEAT', 'REPEAT');
     }
 
    display() {

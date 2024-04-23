@@ -12,6 +12,7 @@ export class MyCylinder extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];  
 
         var alphaAng = 2 * Math.PI / this.slices;
         var deltaZ = 1 / this.stacks;
@@ -26,6 +27,11 @@ export class MyCylinder extends CGFobject {
 
                 this.vertices.push(ca, sa, z);
                 this.normals.push(ca, sa, 0);
+
+                // Calculate texture coordinates
+                var s = slice / this.slices;
+                var t = stack / this.stacks;
+                this.texCoords.push(s, t);
 
                 if (stack < this.stacks) {
                     var nextStack = stack + 1;

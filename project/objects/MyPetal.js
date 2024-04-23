@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
 import { MyTriangle } from '../primitives/MyTriangle.js'; 
 
 export class MyPetal extends CGFobject {
@@ -22,6 +22,10 @@ export class MyPetal extends CGFobject {
     this.appearance = new CGFappearance(this.scene);
     this.appearance.setAmbient(this.r, this.g, this.b, 1.0);     
     this.appearance.setDiffuse(this.r, this.g, this.b, 1.0); 
+
+    this.texture = new CGFtexture(this.scene, 'images/petal.jpg');
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
   }
 
   display() {

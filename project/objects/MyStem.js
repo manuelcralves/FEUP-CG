@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
 import { MyCylinder } from '../primitives/MyCylinder.js';
 import { MyLeaf } from './MyLeaf.js';
 
@@ -51,6 +51,10 @@ export class MyStem extends CGFobject {
         this.appearance.setDiffuse(this.r, this.g, this.b, 1.0);
         this.appearance.setSpecular(this.r, this.g, this.b, 1.0);
         this.appearance.setShininess(10.0);
+
+        this.texture = new CGFtexture(this.scene, 'images/stem.jpg');
+        this.appearance.setTexture(this.texture);
+        this.appearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
       }
 
     display() {

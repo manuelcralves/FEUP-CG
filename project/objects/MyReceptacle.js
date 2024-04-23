@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
 import { MySphere } from '../primitives/MySphere.js'; 
 
 export class MyReceptacle extends CGFobject {
@@ -22,6 +22,10 @@ export class MyReceptacle extends CGFobject {
     this.appearance = new CGFappearance(this.scene);
     this.appearance.setAmbient(this.r, this.g, this.b, 1.0); 
     this.appearance.setDiffuse(this.r, this.g, this.b, 1.0); 
+
+    this.texture = new CGFtexture(this.scene, 'images/receptacle.jpg');
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
   }
 
   display() {
