@@ -101,6 +101,7 @@ export class MyBee extends CGFobject {
     this.scene.pushMatrix();
     this.scene.translate(this.position.x, (Math.sin(this.offsetBee) / 2)+this.position.y, this.position.z);
     this.scene.rotate(this.orientation*Math.PI, 0, 1, 0);
+    this.scene.scale(this.scene.scaleFactor, this.scene.scaleFactor, this.scene.scaleFactor);
     this.body.display();
     this.head.display();
     this.antenna.display();
@@ -115,24 +116,51 @@ export class MyBee extends CGFobject {
   this.offsetBee += this.velocityBee * t;
   this.offsetWing += this.velocityWing * t;
 
-  const dampingFactor = 0.05;
-  this.velocity.x *= dampingFactor;
-  this.velocity.z *= dampingFactor;
-
   this.position.x += this.velocity.x * t;
   this.position.z += this.velocity.z * t;
 }
 
-  turn(v) {
-    this.orientation += v;
+turn(v) {
+  // Calculate the current speed
+  const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2 + this.velocity.z ** 2);
 
-    const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2 + this.velocity.z ** 2)/2;
-    this.velocity.x = speed * Math.cos(this.orientation);
-    this.velocity.y = speed * Math.sin(this.orientation);
-  }
+  // Change the orientation
+  this.orientation += v/3*this.scene.speedFactor;
+
+  // Calculate the new direction
+  const newDirectionX = -Math.cos(this.orientation*Math.PI) * speed;
+  const newDirectionZ = Math.sin(this.orientation*Math.PI) * speed;
+
+  // Apply the speed in the new direction
+  this.velocity.x = newDirectionX;
+  this.velocity.z = newDirectionZ;
+}
 
   accelerate(v) {
-      this.velocity.x +=v*Math.cos(-this.orientation*Math.PI);
-      this.velocity.z +=v*Math.sin(-this.orientation*Math.PI);
+  const maxSpeed = Math.abs(v)/10; // Define your maximum speed here
+
+  if(v > 0) {
+    this.velocity.x -= v*Math.cos(this.orientation*Math.PI)/150;
+    this.velocity.z +=v*Math.sin(this.orientation*Math.PI)/150;
+  } else if (v < 0){
+    const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2 + this.velocity.z ** 2);
+    if (speed <= 0.001) {
+      this.velocity.x = 0;
+      this.velocity.y = 0;
+      this.velocity.z = 0;
+      return; 
+    }
+    this.velocity.x -= v*Math.cos(this.orientation*Math.PI)/150;
+    this.velocity.z +=v*Math.sin(this.orientation*Math.PI)/150;
   }
+
+  const currentSpeed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2 + this.velocity.z ** 2);
+  if (currentSpeed > maxSpeed) {
+    const speedFactor = maxSpeed / currentSpeed;
+    this.velocity.x *= speedFactor;
+    this.velocity.z *= speedFactor;
+  }
+  console.log(v);
+  console.log(currentSpeed);
+}
 }

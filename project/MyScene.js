@@ -57,6 +57,7 @@
       //Objects connected to MyInterface
       this.displayAxis = true;
       this.scaleFactor = 1;
+      this.speedFactor = 1;
 
       this.enableTextures(true);
 
@@ -155,22 +156,22 @@
       if (this.gui.isKeyPressed("KeyW")) {
         text+=" W ";
         keysPressed=true;
-        this.bee.accelerate(-0.1);
+        this.bee.accelerate(0.1*this.speedFactor);
       }
       if (this.gui.isKeyPressed("KeyS")) {
         text+=" S ";
         keysPressed=true;
-        this.bee.accelerate(0.1);
+        this.bee.accelerate(-0.1*this.speedFactor);
       }
       if (this.gui.isKeyPressed("KeyA")) {
         text+=" A ";
         keysPressed=true;
-        this.bee.turn(0.1);
+        this.bee.turn(0.1*this.speedFactor);
       }
       if (this.gui.isKeyPressed("KeyD")) {
         text+=" D ";
         keysPressed=true;
-        this.bee.turn(-0.1);
+        this.bee.turn(-0.1*this.speedFactor);
       }
       if (this.gui.isKeyPressed("KeyR")) {
         text+=" R ";
