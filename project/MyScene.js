@@ -52,7 +52,7 @@
       //let radius = Math.random() * (7 - 3) + 3;
       //this.flower = new MyFlower(this, radius, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
       this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
-      this.bee = new MyBee(this);
+      this.bee = new MyBee(this, 0, 3, 0, 0);
 
       //Objects connected to MyInterface
       this.displayAxis = true;
@@ -126,10 +126,7 @@
 
       this.panorama.display();
 
-      this.pushMatrix();
-      this.translate(0,3,0);
       this.bee.display();
-      this.popMatrix();
 
       //this.garden.display();
 
@@ -154,16 +151,33 @@
     checkKeys() {
       var text="Keys pressed: ";
       var keysPressed=false;
-      // Check for key codes e.g. in https://keycode.info/
+
       if (this.gui.isKeyPressed("KeyW")) {
-          text+=" W ";
-          keysPressed=true;
+        text+=" W ";
+        keysPressed=true;
+        this.bee.accelerate(-0.1);
       }
       if (this.gui.isKeyPressed("KeyS")) {
-          text+=" S ";
-          keysPressed=true;
+        text+=" S ";
+        keysPressed=true;
+        this.bee.accelerate(0.1);
+      }
+      if (this.gui.isKeyPressed("KeyA")) {
+        text+=" A ";
+        keysPressed=true;
+        this.bee.turn(0.1);
+      }
+      if (this.gui.isKeyPressed("KeyD")) {
+        text+=" D ";
+        keysPressed=true;
+        this.bee.turn(-0.1);
+      }
+      if (this.gui.isKeyPressed("KeyR")) {
+        text+=" R ";
+        keysPressed=true;
+        this.bee = new MyBee(this, 0, 3, 0, 0);
       }
       if (keysPressed)
-          console.log(text);
+        console.log(text);
     }
   }

@@ -1,7 +1,4 @@
 import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
-import { MySphere } from '../primitives/MySphere.js';
-import { MyCylinder } from '../primitives/MyCylinder.js';
-import { MyCircle } from '../primitives/MyCircle.js';
 import { MyBeeBody } from './bee/MyBeeBody.js';
 import { MyBeeHead } from './bee/MyBeeHead.js';
 import { MyBeeAntenna } from './bee/MyBeeAntenna.js';
@@ -11,13 +8,17 @@ import { MyBeeFootJoint } from './bee/MyBeeFootJoint.js';
 import { MyBeeWing } from './bee/MyBeeWing.js';
 
 export class MyBee extends CGFobject {
-  constructor(scene) {
+  constructor(scene, x, y, z, orientation) {
     super(scene);
 
     this.offsetBee = 0;
     this.offsetWing = 0;
     this.velocityBee = 0.005;
     this.velocityWing = 0.025;
+
+    this.position = { x: x, y: y, z: z };
+    this.orientation = orientation;
+    this.velocity = { x: 0, y: 0, z: 0 };
 
     this.initBuffers();
   }
@@ -98,7 +99,8 @@ export class MyBee extends CGFobject {
 
   display() {
     this.scene.pushMatrix();
-    this.scene.translate(0, Math.sin(this.offsetBee) / 2, 0);
+    this.scene.translate(this.position.x, (Math.sin(this.offsetBee) / 2)+this.position.y, this.position.z);
+    this.scene.rotate(this.orientation*Math.PI, 0, 1, 0);
     this.body.display();
     this.head.display();
     this.antenna.display();
@@ -110,7 +112,27 @@ export class MyBee extends CGFobject {
   }
 
   update(t) {
-    this.offsetBee += this.velocityBee * t;
-    this.offsetWing += this.velocityWing * t;
+  this.offsetBee += this.velocityBee * t;
+  this.offsetWing += this.velocityWing * t;
+
+  const dampingFactor = 0.05;
+  this.velocity.x *= dampingFactor;
+  this.velocity.z *= dampingFactor;
+
+  this.position.x += this.velocity.x * t;
+  this.position.z += this.velocity.z * t;
+}
+
+  turn(v) {
+    this.orientation += v;
+
+    const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2 + this.velocity.z ** 2)/2;
+    this.velocity.x = speed * Math.cos(this.orientation);
+    this.velocity.y = speed * Math.sin(this.orientation);
+  }
+
+  accelerate(v) {
+      this.velocity.x +=v*Math.cos(-this.orientation*Math.PI);
+      this.velocity.z +=v*Math.sin(-this.orientation*Math.PI);
   }
 }
