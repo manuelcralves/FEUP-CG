@@ -6,6 +6,8 @@ import { MyBeeAntennaTop } from './bee/MyBeeAntennaTop.js';
 import { MyBeeFoot } from './bee/MyBeeFoot.js';
 import { MyBeeFootJoint } from './bee/MyBeeFootJoint.js';
 import { MyBeeWing } from './bee/MyBeeWing.js';
+import { MyGarden } from '../MyGarden.js';
+import { MyFlower } from './MyFlower.js';
 
 export class MyBee extends CGFobject {
   constructor(scene, x, y, z, orientation) {
@@ -99,7 +101,11 @@ export class MyBee extends CGFobject {
 
   display() {
     this.scene.pushMatrix();
-    this.scene.translate(this.position.x, (Math.sin(this.offsetBee) / 2)+this.position.y, this.position.z);
+    if(this.velocity.y == 0) {
+      this.scene.translate(this.position.x, (Math.sin(this.offsetBee) / 2)+this.position.y, this.position.z);
+    } else {
+      this.scene.translate(this.position.x, +this.position.y, this.position.z);
+    }
     this.scene.rotate(this.orientation*Math.PI, 0, 1, 0);
     this.scene.scale(this.scene.scaleFactor, this.scene.scaleFactor, this.scene.scaleFactor);
     this.body.display();
@@ -113,12 +119,16 @@ export class MyBee extends CGFobject {
   }
 
   update(t) {
-  this.offsetBee += this.velocityBee * t;
-  this.offsetWing += this.velocityWing * t;
+    this.offsetBee += this.velocityBee * t;
+    this.offsetWing += this.velocityWing * t;
 
-  this.position.x += this.velocity.x * t;
-  this.position.z += this.velocity.z * t;
+    if (!this.checkCollisions(this.scene.garden)) {
+        this.position.x += this.velocity.x * t;
+        this.position.y += this.velocity.y * t;
+        this.position.z += this.velocity.z * t;
+    }
 }
+
 
 turn(v) {
   // Calculate the current speed
@@ -160,7 +170,83 @@ turn(v) {
     this.velocity.x *= speedFactor;
     this.velocity.z *= speedFactor;
   }
-  console.log(v);
-  console.log(currentSpeed);
 }
+
+vertical(v) {
+  this.velocity.y += v/100;
+}
+
+stop() {
+  this.velocity.x = 0;
+  this.velocity.y = 0;
+  this.velocity.z = 0;
+}
+
+checkCollisions(garden) {
+  for (let i = 0; i < garden.rows; i++) {
+      for (let j = 0; j < garden.cols; j++) {
+          const flower = garden.flowers[i][j];
+          // Calculate distance between bee and flower
+          if(this.position.y < flower.heightStem-flower.radiusReceptacle) {
+            const distanceStem = Math.sqrt(
+              Math.pow(this.position.x - i*garden.spacing, 2) +
+              Math.pow(this.position.z - j*garden.spacing, 2)
+          );
+
+          // Check collision based on distance and flower size
+          if (distanceStem < flower.radiusStem + 2) {
+              // Collision detected, stop bee movement
+              this.velocity.x = 0;
+              this.velocity.y = 0;
+              this.velocity.z = 0;
+
+              console.log("Collide Stem");
+              return true; // Collision detected
+          }
+          } else if (this.position.y > flower.heightStem+2*flower.radiusReceptacle){
+            const distanceFlower = Math.sqrt(
+              Math.pow(this.position.x - i*garden.spacing, 2) +
+              Math.pow(this.position.y - (flower.heightStem+flower.radiusReceptacle), 2) +
+              Math.pow(this.position.z - j*garden.spacing, 2)
+          );
+
+          if (distanceFlower < flower.radiusReceptacle+1) {
+            // Collision detected, stop bee movement
+            this.velocity.x = 0;
+            this.velocity.y = 0;
+            this.velocity.z = 0;
+
+            console.log("Colllide Receptacle");
+            return true; // Collision detected
+        }
+          } else {
+            const distanceFlower = Math.sqrt(
+              Math.pow(this.position.x - i*garden.spacing, 2) +
+              Math.pow(this.position.y - (flower.heightStem+flower.radiusReceptacle), 2) +
+              Math.pow(this.position.z - j*garden.spacing, 2)
+          );
+
+          if (distanceFlower < flower.radiusFlower + 1) {
+            // Collision detected, stop bee movement
+            this.velocity.x = 0;
+            this.velocity.y = 0;
+            this.velocity.z = 0;
+
+            console.log("Collide Flower");
+            return true; // Collision detected
+        }
+          }
+      }
+  }
+  return false; // No collisions detected
+}
+/*if(Math.sqrt(Math.pow(this.position.x, 2) + Math.pow(this.position.y, 2) + Math.pow(this.position.z, 2)) < 2) {
+  this.velocity.x = 0;
+  this.velocity.y = 0;
+  this.velocity.z = 0;
+  console.log("Collision");
+  return true;
+}
+return false;
+}*/
 }

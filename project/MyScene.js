@@ -53,7 +53,7 @@ import { MyPollen } from "./objects/MyPollen.js";
       //let radius = Math.random() * (7 - 3) + 3;
       //this.flower = new MyFlower(this, radius, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
       this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
-      this.bee = new MyBee(this, 0, 3, 0, 0);
+      this.bee = new MyBee(this, -5, 3, -5, 0);
       this.pollen = new MyPollen(this);
 
       //Objects connected to MyInterface
@@ -175,10 +175,25 @@ import { MyPollen } from "./objects/MyPollen.js";
         keysPressed=true;
         this.bee.turn(-0.1*this.speedFactor);
       }
+      if (this.gui.isKeyPressed("KeyF")) {
+        text+=" F ";
+        keysPressed=true;
+        this.bee.vertical(-0.1*this.speedFactor);
+      }
+      if (this.gui.isKeyPressed("KeyP")) {
+        text+=" P ";
+        keysPressed=true;
+        this.bee.vertical(0.1*this.speedFactor);
+      }
+      if (this.gui.isKeyPressed("KeyG")) {
+        text+=" G ";
+        keysPressed=true;
+        this.bee.stop();
+      }
       if (this.gui.isKeyPressed("KeyR")) {
         text+=" R ";
         keysPressed=true;
-        this.bee = new MyBee(this, 0, 3, 0, 0);
+        this.bee = new MyBee(this, 0, 30, 0, 0);
       }
       if (keysPressed)
         console.log(text);
