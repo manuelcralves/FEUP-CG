@@ -22,6 +22,8 @@ export class MyBee extends CGFobject {
     this.orientation = orientation;
     this.velocity = { x: 0, y: 0, z: 0 };
 
+    this.collision = false;
+
     this.initBuffers();
   }
 
@@ -122,11 +124,20 @@ export class MyBee extends CGFobject {
     this.offsetBee += this.velocityBee * t;
     this.offsetWing += this.velocityWing * t;
 
-    if (!this.checkCollisions(this.scene.garden)) {
+    this.checkCollisions(this.scene.garden);
+    console.log(this.collision)
+
+    if (!this.collision) {
         this.position.x += this.velocity.x * t;
         this.position.y += this.velocity.y * t;
         this.position.z += this.velocity.z * t;
-    }
+    } else {
+      this.position.x -= this.velocity.x * t * 2;
+      this.position.y -= this.velocity.y * t * 2;
+      this.position.z -= this.velocity.z * t * 2;
+      this.stop();
+      this.collision = false;
+  }
 }
 
 
@@ -186,24 +197,19 @@ checkCollisions(garden) {
   for (let i = 0; i < garden.rows; i++) {
       for (let j = 0; j < garden.cols; j++) {
           const flower = garden.flowers[i][j];
-          // Calculate distance between bee and flower
           if(this.position.y < flower.heightStem-flower.radiusReceptacle) {
+            console.log("Stem Level");
             const distanceStem = Math.sqrt(
               Math.pow(this.position.x - i*garden.spacing, 2) +
               Math.pow(this.position.z - j*garden.spacing, 2)
           );
 
-          // Check collision based on distance and flower size
           if (distanceStem < flower.radiusStem + 2) {
-              // Collision detected, stop bee movement
-              this.velocity.x = 0;
-              this.velocity.y = 0;
-              this.velocity.z = 0;
-
               console.log("Collide Stem");
-              return true; // Collision detected
+              this.collision = true;
           }
           } else if (this.position.y > flower.heightStem+2*flower.radiusReceptacle){
+            console.log("Receptacle Level");
             const distanceFlower = Math.sqrt(
               Math.pow(this.position.x - i*garden.spacing, 2) +
               Math.pow(this.position.y - (flower.heightStem+flower.radiusReceptacle), 2) +
@@ -211,15 +217,11 @@ checkCollisions(garden) {
           );
 
           if (distanceFlower < flower.radiusReceptacle+1) {
-            // Collision detected, stop bee movement
-            this.velocity.x = 0;
-            this.velocity.y = 0;
-            this.velocity.z = 0;
-
             console.log("Colllide Receptacle");
-            return true; // Collision detected
+           this.collision = true;
         }
           } else {
+            console.log("Flower Level");
             const distanceFlower = Math.sqrt(
               Math.pow(this.position.x - i*garden.spacing, 2) +
               Math.pow(this.position.y - (flower.heightStem+flower.radiusReceptacle), 2) +
@@ -227,26 +229,11 @@ checkCollisions(garden) {
           );
 
           if (distanceFlower < flower.radiusFlower + 1) {
-            // Collision detected, stop bee movement
-            this.velocity.x = 0;
-            this.velocity.y = 0;
-            this.velocity.z = 0;
-
             console.log("Collide Flower");
-            return true; // Collision detected
+           this.collision = true;
         }
           }
       }
   }
-  return false; // No collisions detected
 }
-/*if(Math.sqrt(Math.pow(this.position.x, 2) + Math.pow(this.position.y, 2) + Math.pow(this.position.z, 2)) < 2) {
-  this.velocity.x = 0;
-  this.velocity.y = 0;
-  this.velocity.z = 0;
-  console.log("Collision");
-  return true;
-}
-return false;
-}*/
 }
