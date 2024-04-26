@@ -9,6 +9,7 @@
   import { MyGarden } from "./MyGarden.js";
   import { MyBee } from "./objects/MyBee.js";
   import { MyCircle } from "./primitives/MyCircle.js";
+import { MyPollen } from "./objects/MyPollen.js";
 
   /**
    * MyScene
@@ -53,6 +54,7 @@
       //this.flower = new MyFlower(this, radius, 6, [1.0,0.0,0.0], 1, [1.0,1.0,0.0], 0.25, 10,[0.0,1.0,0.0], [0.2,0.4,0.2], -Math.PI/4, Math.PI/4); 
       this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
       this.bee = new MyBee(this, 0, 3, 0, 0);
+      this.pollen = new MyPollen(this);
 
       //Objects connected to MyInterface
       this.displayAxis = true;
@@ -129,7 +131,7 @@
 
       this.bee.display();
 
-      //this.garden.display();
+      this.garden.display();
 
       //this.flower.display();
 

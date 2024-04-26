@@ -3,6 +3,7 @@ import { MyStem } from './MyStem.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyPetal } from './MyPetal.js';
 import { MyCircle } from '../primitives/MyCircle.js';
+import { MyPollen } from "./MyPollen.js";
 
 export class MyFlower extends CGFobject {
   
@@ -26,6 +27,7 @@ export class MyFlower extends CGFobject {
     this.gLeaf = gLeaf;
     this.bLeaf = bLeaf;
     this.tilt = Math.random() * (maxTilt - minTilt) + minTilt;
+    this.randomRotation = Math.random() * 2 * Math.PI; 
 
     this.initBuffers();
   }
@@ -39,6 +41,7 @@ export class MyFlower extends CGFobject {
       this.petals.push(new MyPetal(this.scene, this.rPetal, this.gPetal, this.bPetal, angle, -Math.PI/6, Math.PI/6));
     }
     this.circle = new MyCircle(this.scene, 100, this.radiusFlower);
+    this.pollen = new MyPollen(this.scene);
   }
 
   display() {
@@ -46,6 +49,12 @@ export class MyFlower extends CGFobject {
   this.scene.translate(0,this.heightStem + this.radiusReceptacle/2,0);
   this.scene.scale(this.radiusReceptacle,this.radiusReceptacle,this.radiusReceptacle);
   this.receptacle.display();
+  this.scene.popMatrix();
+
+  this.scene.pushMatrix();
+  this.scene.translate(0,this.heightStem + this.radiusReceptacle*1.5,0);
+  this.scene.rotate(this.randomRotation, 0, 1, 0);
+  this.pollen.display();
   this.scene.popMatrix();
 
   this.scene.pushMatrix();
