@@ -23,6 +23,9 @@ export class MyBee extends CGFobject {
     this.velocity = { x: 0, y: 0, z: 0 };
 
     this.collision = false;
+    this.collideReceptacle = false;
+    this.storeVelocity = { x: 0, y: 0, z: 0 };
+    this.storeHeight = this.position.y;
 
     this.initBuffers();
   }
@@ -121,13 +124,14 @@ export class MyBee extends CGFobject {
   }
 
   update(t) {
+
+    console.log(this.storeVelocity);
     this.offsetBee += this.velocityBee * t;
     this.offsetWing += this.velocityWing * t;
 
     this.checkCollisions(this.scene.garden);
-    console.log(this.collision)
 
-    if (!this.collision) {
+    if (!this.collision) { 
         this.position.x += this.velocity.x * t;
         this.position.y += this.velocity.y * t;
         this.position.z += this.velocity.z * t;
@@ -138,12 +142,22 @@ export class MyBee extends CGFobject {
       this.stop();
       this.collision = false;
   }
+
+  if(this.collideReceptacle && this.velocity.y > 0 && this.position.y >= this.storeHeight) {
+    this.velocity.x = this.storeVelocity.x;
+    this.velocity.y = 0;
+    this.velocity.z = this.storeVelocity.z;
+    this.collideReceptacle = false;
+  }
 }
 
 
 turn(v) {
   // Calculate the current speed
-  const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2 + this.velocity.z ** 2);
+  if(!this.collideReceptacle) { 
+    this.storeVelocity = {x: this.velocity.x, y: 0, z: this.velocity.z};
+    }
+  const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.z ** 2);
 
   // Change the orientation
   this.orientation += v/3*this.scene.speedFactor;
@@ -158,6 +172,9 @@ turn(v) {
 }
 
   accelerate(v) {
+  if(!this.collideReceptacle) { 
+    this.storeVelocity = {x: this.velocity.x, y: 0, z: this.velocity.z};
+  }
   const maxSpeed = Math.abs(v)/10; // Define your maximum speed here
 
   if(v > 0) {
@@ -184,7 +201,14 @@ turn(v) {
 }
 
 vertical(v) {
-  this.velocity.y += v/100;
+  if(v > 0 && this.velocity.y > 0 || v < 0 && this.velocity.y < 0) {
+    return;
+} else {
+  if(this.velocity.y <= 0 && v < 0) {
+    this.storeHeight = this.position.y;
+  }
+  this.velocity.y += v/50;
+}
 }
 
 stop() {
@@ -198,7 +222,6 @@ checkCollisions(garden) {
       for (let j = 0; j < garden.cols; j++) {
           const flower = garden.flowers[i][j];
           if(this.position.y < flower.heightStem-flower.radiusReceptacle) {
-            console.log("Stem Level");
             const distanceStem = Math.sqrt(
               Math.pow(this.position.x - i*garden.spacing, 2) +
               Math.pow(this.position.z - j*garden.spacing, 2)
@@ -209,7 +232,6 @@ checkCollisions(garden) {
               this.collision = true;
           }
           } else if (this.position.y > flower.heightStem+2*flower.radiusReceptacle){
-            console.log("Receptacle Level");
             const distanceFlower = Math.sqrt(
               Math.pow(this.position.x - i*garden.spacing, 2) +
               Math.pow(this.position.y - (flower.heightStem+flower.radiusReceptacle), 2) +
@@ -219,9 +241,10 @@ checkCollisions(garden) {
           if (distanceFlower < flower.radiusReceptacle+1) {
             console.log("Colllide Receptacle");
            this.collision = true;
+           this.collideReceptacle = true;
         }
+        
           } else {
-            console.log("Flower Level");
             const distanceFlower = Math.sqrt(
               Math.pow(this.position.x - i*garden.spacing, 2) +
               Math.pow(this.position.y - (flower.heightStem+flower.radiusReceptacle), 2) +
@@ -231,6 +254,9 @@ checkCollisions(garden) {
           if (distanceFlower < flower.radiusFlower + 1) {
             console.log("Collide Flower");
            this.collision = true;
+           if(this.velocity.y < 0) {
+            this.collideReceptacle = true;
+           }
         }
           }
       }
