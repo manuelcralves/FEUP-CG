@@ -27,6 +27,7 @@ export class MyFlower extends CGFobject {
     this.gLeaf = gLeaf;
     this.bLeaf = bLeaf;
     this.tilt = Math.random() * (maxTilt - minTilt) + minTilt;
+    this.grabbingPollen = true;
     this.randomRotation = Math.random() * 2 * Math.PI; 
 
     this.initBuffers();
@@ -52,12 +53,6 @@ export class MyFlower extends CGFobject {
   this.scene.popMatrix();
 
   this.scene.pushMatrix();
-  this.scene.translate(0,this.heightStem + this.radiusReceptacle*1.5,0);
-  this.scene.rotate(this.randomRotation, 0, 1, 0);
-  this.pollen.display();
-  this.scene.popMatrix();
-
-  this.scene.pushMatrix();
   this.stem.display();
   this.scene.popMatrix();
 
@@ -71,6 +66,14 @@ export class MyFlower extends CGFobject {
     this.scene.scale(petalScaleFactor, petalScaleFactor, petalScaleFactor);
     this.scene.rotate(Math.PI / 2, 1, 0, 0);
     this.petals[i].display(); 
+    this.scene.popMatrix();
+  }
+
+  if(this.grabbingPollen) {
+    this.scene.pushMatrix();
+    this.scene.translate(0,this.heightStem + this.radiusReceptacle*1.5,0);
+    this.scene.rotate(this.randomRotation, 0, 1, 0);
+    this.pollen.display();
     this.scene.popMatrix();
   }
 }

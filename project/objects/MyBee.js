@@ -8,6 +8,7 @@ import { MyBeeFootJoint } from './bee/MyBeeFootJoint.js';
 import { MyBeeWing } from './bee/MyBeeWing.js';
 import { MyGarden } from '../MyGarden.js';
 import { MyFlower } from './MyFlower.js';
+import { MyPollen } from './MyPollen.js';
 
 export class MyBee extends CGFobject {
   constructor(scene, x, y, z, orientation) {
@@ -26,6 +27,7 @@ export class MyBee extends CGFobject {
     this.collideReceptacle = false;
     this.storeVelocity = { x: 0, y: 0, z: 0 };
     this.storeHeight = this.position.y;
+    this.grabbingPollen = false;
 
     this.initBuffers();
   }
@@ -38,6 +40,7 @@ export class MyBee extends CGFobject {
     this.setFeet();
     this.setFeetJoints();
     this.setWings();
+    this.setPollen();
   }
 
 
@@ -104,6 +107,10 @@ export class MyBee extends CGFobject {
     this.wings = new MyBeeWing(this.scene, this.wingAppearance);
   }
 
+  setPollen() {
+    this.pollen = new MyPollen(this.scene);
+  }
+
   display() {
     this.scene.pushMatrix();
     if(this.velocity.y == 0) {
@@ -120,12 +127,19 @@ export class MyBee extends CGFobject {
     this.feet.display();
     this.feetJoints.display(); 
     this.wings.display(this.offsetWing);
+    if(this.grabbingPollen) {
+    this.scene.pushMatrix();
+    this.scene.translate(-0.1, -0.4, 0.6);
+    this.scene.rotate(Math.PI/2, 0, 1, 0);
+    this.scene.scale(2,2,2);
+    this.pollen.display();
+    this.scene.popMatrix();
+    }
     this.scene.popMatrix();
   }
 
   update(t) {
 
-    console.log(this.storeVelocity);
     this.offsetBee += this.velocityBee * t;
     this.offsetWing += this.velocityWing * t;
 
@@ -243,6 +257,12 @@ checkCollisions(garden) {
            this.collision = true;
            this.collideReceptacle = true;
         }
+
+        if(this.collideReceptacle && !this.grabbingPollen) {
+          this.grabbingPollen = true;
+          flower.pollen = false;
+          return;
+        }
         
           } else {
             const distanceFlower = Math.sqrt(
@@ -257,6 +277,12 @@ checkCollisions(garden) {
            if(this.velocity.y < 0) {
             this.collideReceptacle = true;
            }
+
+           if(this.collideReceptacle && !this.grabbingPollen) {
+            this.grabbingPollen = true;
+            flower.polen = false;
+            return;
+          }
         }
           }
       }
