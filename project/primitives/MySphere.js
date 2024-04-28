@@ -1,14 +1,11 @@
 import { CGFobject } from '../../lib/CGF.js';
 
 export class MySphere extends CGFobject {
-  constructor(scene, slices, stacks, inverted = false, min, max, variable =false) {
+  constructor(scene, slices, stacks, inverted = false) {
     super(scene);
-    this.stacks = stacks * 2; 
-    this.slices = slices; 
+    this.stacks = stacks * 2;
+    this.slices = slices;
     this.inverted = inverted;
-    this.variable = variable;
-    this.min = min;
-    this.max = max;
 
     this.initBuffers();
   }
@@ -26,14 +23,26 @@ export class MySphere extends CGFobject {
       const alpha = latitude * delta_alpha;
 
       for (let longitude = 0; longitude <= this.slices; longitude++) {
+        //for (let longitude = 0; longitude <= this.slices; longitude++) {
         const theta = longitude * delta_theta;
         this.addVertex(alpha, theta);
         this.addIndices(latitude, longitude);
         this.addNormal(alpha, theta);
         this.addTexCoord(latitude, longitude);
+        /*         if (latitude == 0) {
+                  for (longitude = 1; longitude <= this.slices; longitude++) {
+                    this.addTexCoord(latitude, longitude);
+                  }
+                  break;
+                }
+                if (latitude == this.stacks) {
+                  for (longitude = 1; longitude <= this.slices; longitude++) {
+                    this.addTexCoord(latitude, longitude);
+                  }
+                  break;
+                } */
       }
     }
-console.log("vertices number" + this.vertices.length)/3;
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
   }
@@ -42,21 +51,18 @@ console.log("vertices number" + this.vertices.length)/3;
     const x = Math.cos(theta) * Math.sin(alpha);
     const y = Math.cos(alpha);
     const z = Math.sin(-theta) * Math.sin(alpha);
-    this.vertices.push(
-      this.variable ? x+Math.random()*(this.max-this.min) : x,
-      this.variable ? y+Math.random()*(this.max-this.min) : y,
-      this.variable ? z+Math.random()*(this.max-this.min) : z);
+    this.vertices.push(x, y, z);
   }
 
   addIndices(latitude, longitude) {
     if (latitude < this.stacks && longitude < this.slices) {
       const curr = latitude * (this.slices + 1) + longitude;
       const next = curr + (this.slices + 1);
-      if(!this.inverted){
+      if (!this.inverted) {
         this.indices.push(curr, next, curr + 1);
         this.indices.push(next, next + 1, curr + 1);
       }
-      else{
+      else {
         this.indices.push(curr + 1, next, curr);
         this.indices.push(curr + 1, next + 1, next);
       }
