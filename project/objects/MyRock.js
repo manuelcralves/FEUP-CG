@@ -2,7 +2,7 @@ import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
 import { MySphere } from '../primitives/MySphereVariable.js';
 
 export class MyRock extends CGFobject {
-  constructor(scene, slices, stacks, x = 0, y = 0, z = 0) {
+  constructor(scene, slices, stacks, x = 0, y = 0, z = 0, scale) {
     super(scene);
     this.stacks = stacks;
     this.slices = slices;
@@ -10,9 +10,9 @@ export class MyRock extends CGFobject {
     this.x = x;
     this.y = y;
     this.z = z;
-    this.x_scale = Math.random() + 0.5;
-    this.y_scale = Math.random() * 0.5 + 0.5;
-    this.z_scale = Math.random() + 0.5;
+    this.x_scale = Math.random() + scale;
+    this.y_scale = Math.random() * 0.2 + scale;
+    this.z_scale = Math.random() + scale;
 
     this.stoneTex = new CGFtexture(this.scene, './images/stone.jpg');
 
