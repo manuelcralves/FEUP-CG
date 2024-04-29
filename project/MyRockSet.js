@@ -1,6 +1,4 @@
-import { CGFobject, CGFappearance } from '../lib/CGF.js';
 import { MyRock } from './objects/MyRock.js';
-
 
 export class MyRockSet {
     constructor(scene, slices, stacks, texture) {
@@ -8,8 +6,7 @@ export class MyRockSet {
         this.rocks = [];
         this.base = Math.floor(Math.random() * 5) + 10;
         this.height = Math.floor(Math.random() * 3) + 7;
-        this.radius = Math.floor(Math.random() * 3) + 2;
-        //        this.radius = this.height;
+        this.radius = Math.floor(Math.random() * 2) + 3;
         this.slices = slices;
         this.stacks = stacks;
         this.texture = texture;
@@ -27,7 +24,7 @@ export class MyRockSet {
 
             // Capstone
             if (layer == this.height) {
-                this.rocks.push(new MyRock(this.scene, this.slices, this.stacks, 0, this.height, 0, scale));
+                this.rocks.push(new MyRock(this.scene, this.slices, this.stacks, this.texture, 0, this.height, 0, scale));
                 break;
             }
             // Layer building
@@ -37,7 +34,7 @@ export class MyRockSet {
                 let x = Math.sin(ang) * this.radius;
                 let z = Math.cos(ang) * this.radius;
                 let y = layer;
-                const new_rock = new MyRock(this.scene, this.slices, this.stacks, x, y, z, scale);
+                const new_rock = new MyRock(this.scene, this.slices, this.stacks, this.texture, x, y, z, scale);
                 this.rocks.push(new_rock);
                 ang += delta_ang;
             }

@@ -1,4 +1,3 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
 import { MyFlower } from './objects/MyFlower.js';
 
 export class MyGarden {

@@ -1,17 +1,15 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
-import { MyPetal } from "./objects/MyPetal.js";
 import { MyPlane } from "./MyPlane.js";
-import { MyReceptacle } from "./objects/MyReceptacle.js";
 import { MySphere } from "./primitives/MySphere.js";
-import { MyStem } from "./objects/MyStem.js";
 import { MyFlower } from "./objects/MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyBee } from "./objects/MyBee.js";
-import { MyCircle } from "./primitives/MyCircle.js";
 import { MyPollen } from "./objects/MyPollen.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./MyRockSet.js";
+import {MyHive} from "./objects/MyHive.js";
+import {MyGrassLeaf} from "./objects/MyGrassLeaf.js";
 
 /**
  * MyScene
@@ -58,7 +56,9 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
     this.bee = new MyBee(this, 0, 20, 0, 0);
     this.pollen = new MyPollen(this);
-    this.rockset = new MyRockSet(this, 7, 4, this.stoneTex);
+    this.rockset = new MyRockSet(this, 7, 4, './images/stone.jpg');
+    this.hive = new MyHive(this,10,0,10);
+    //this.grassleaf = new MyGrassLeaf(this,[this.rLeaf, this.gLeaf, this.bLeaf]);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -123,22 +123,23 @@ export class MyScene extends CGFscene {
     this.sphere.display();
     this.popMatrix();*/
 
-    /*this.pushMatrix();
+    this.pushMatrix();
     this.appearance.apply();
-    this.translate(0,-100,0);
+    this.translate(0,0,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
-    this.popMatrix();*/
+    this.popMatrix();
 
     this.panorama.display();
 
-    this.bee.display();
+        //this.flower.display();
     //this.rock.display();
+    this.garden.display();
+    this.bee.display();
     this.rockset.display();
-    //this.garden.display();
+    this.hive.display();
 
-    //this.flower.display();
 
     // ---- END Primitive drawing section
   }
