@@ -123,13 +123,13 @@ export class MyScene extends CGFscene {
     this.sphere.display();
     this.popMatrix();*/
 
-    this.pushMatrix();
+    /*this.pushMatrix();
     this.appearance.apply();
     this.translate(0,0,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
-    this.popMatrix();
+    this.popMatrix();*/
 
     this.panorama.display();
 

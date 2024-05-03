@@ -1,5 +1,5 @@
 import { CGFobject, CGFappearance } from '../../lib/CGF.js';
-import { MySphere } from '../primitives/MySphereVariable.js';
+import { MySphere } from '../primitives/MySphere.js';
 
 export class MyPanorama extends CGFobject {
 
