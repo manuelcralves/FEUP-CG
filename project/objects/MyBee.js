@@ -260,7 +260,7 @@ checkCollisions(garden) {
 
         if(this.collideReceptacle && !this.grabbingPollen) {
           this.grabbingPollen = true;
-          flower.pollen = false;
+          flower.hasPollen = false;
           return;
         }
         
@@ -280,7 +280,7 @@ checkCollisions(garden) {
 
            if(this.collideReceptacle && !this.grabbingPollen) {
             this.grabbingPollen = true;
-            flower.polen = false;
+            flower.hasPollen = false;
             return;
           }
         }
