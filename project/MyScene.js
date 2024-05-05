@@ -8,8 +8,9 @@ import { MyBee } from "./objects/MyBee.js";
 import { MyPollen } from "./objects/MyPollen.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./MyRockSet.js";
-import {MyHive} from "./objects/MyHive.js";
-import {MyGrassLeaf} from "./objects/MyGrassLeaf.js";
+import { MyHive } from "./objects/MyHive.js";
+import { MyGrassLeaf } from "./objects/MyGrassLeaf.js";
+import { MyLawn } from "./MyLawn.js";
 
 /**
  * MyScene
@@ -52,13 +53,13 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panoramaTex);
     //let radius = Math.random() * (7 - 3) + 3;
     //this.flower = new MyFlower(this, radius, 6, [1.0, 0.0, 0.0], 1, [1.0, 1.0, 0.0], 0.25, 10, [0.0, 1.0, 0.0], [0.2, 0.4, 0.2], -Math.PI / 4, Math.PI / 4);
-    //this.rock = new MyRock(this, 7, 4);
-    this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
-    this.bee = new MyBee(this, 0, 20, 0, 0);
-    this.pollen = new MyPollen(this);
+    //this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
+    //this.bee = new MyBee(this, 0, 20, 0, 0);
+    //this.pollen = new MyPollen(this);
     this.rockset = new MyRockSet(this, 7, 4, './images/stone.jpg');
-    this.hive = new MyHive(this,10,0,10);
-    //this.grassleaf = new MyGrassLeaf(this,[this.rLeaf, this.gLeaf, this.bLeaf]);
+    //this.hive = new MyHive(this, 10, 0, 10);
+    //this.grassleaf = new MyGrassLeaf(this, 5);
+    this.lawn = new MyLawn(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -123,39 +124,48 @@ export class MyScene extends CGFscene {
     this.sphere.display();
     this.popMatrix();*/
 
-    /*this.pushMatrix();
+    this.pushMatrix();
     this.appearance.apply();
-    this.translate(0,0,0);
-    this.scale(400,400,400);
-    this.rotate(-Math.PI/2.0,1,0,0);
+    this.translate(0, 0, 0);
+    this.scale(400, 400, 400);
+    this.rotate(-Math.PI / 2.0, 1, 0, 0);
     this.plane.display();
-    this.popMatrix();*/
+    this.popMatrix();
 
     this.panorama.display();
 
-        //this.flower.display();
+    //this.flower.display();
     //this.rock.display();
-    this.garden.display();
-    this.bee.display();
+
+    //this.garden.display();
+
+    //this.bee.display();
+    //this.hive.display();
+
     this.rockset.display();
-    this.hive.display();
+
+
+    //this.grassleaf.display();
+    this.lawn.display();
 
 
     // ---- END Primitive drawing section
   }
-  updateGarden() {
-    this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
-  }
-
+  /*   updateGarden() {
+      this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
+    } */
 
   update(t) {
     if (this.previousTime != 0) {
       var deltaTime = t - this.previousTime;
-      this.bee.update(deltaTime);
+      //this.bee.update(deltaTime);
+      this.lawn.update_lawn();
+      //this.grassleaf.oscillate_leaf();
     }
     this.previousTime = t;
-
-    this.checkKeys();
+    //this.checkKeys();
+    //console.log("Updated");
+    //console.log(this.lawn.grass[3][3].vertices);
   }
 
   checkKeys() {
