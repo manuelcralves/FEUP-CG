@@ -5,10 +5,11 @@ export class MyGrassLeaf extends CGFobject {
         super(scene);
         this.stacks = stacks;
         this.texture = 'images/leaf.jpg';
-        this.baseWidth = Math.random() * 0.4 + 0.1;
+        this.baseWidth = Math.random() * 0.4 + 0.2;
         this.thickness = 0.05;
-        this.height = Math.random() * 2 + 4;
+        this.height = Math.random() * 3 + 2;
         this.oscillation = 0;
+
 
         //this.shader = new CGFshader(this.gl, "shaders/grassleaf.vert", "shaders/grassleaf.frag");
 
@@ -23,11 +24,14 @@ export class MyGrassLeaf extends CGFobject {
         this.texCoords = [];
 
         let delta_height = this.height / this.stacks;
-        let delta_width = (this.baseWidth + 0.1) / this.stacks;
+        let delta_width = (this.baseWidth + 0.05) / this.stacks;
+
+        //console.log("Width: " + this.baseWidth);
+        //console.log("Delta width: " + delta_width);
 
         for (var stack = 0; stack < this.stacks; stack++) {
-            this.vertices.push(delta_width * stack + Math.random() * 0.1, delta_height * stack, Math.random() * 0.1);
-            this.vertices.push(this.baseWidth - delta_width * stack + Math.random() * 0.1, delta_height * stack, Math.random() * 0.1);
+            this.vertices.push(delta_width / 2 * stack + Math.random() * 0.05, delta_height * stack, /*0);*/ Math.random() * 0.5);
+            this.vertices.push(this.baseWidth - delta_width / 2 * stack + Math.random() * 0.1, delta_height * stack, /*0);*/ Math.random() * 0.5);
             this.texCoords.push(1 - stack * (1 / this.stacks), 1);
             this.texCoords.push(1 - stack * (1 / this.stacks), 0);
             /* this.vertices.push(delta_width * stack, delta_height * stack, this.thickness);
@@ -39,12 +43,17 @@ export class MyGrassLeaf extends CGFobject {
                 this.indices.push(stack * 2 + 2, stack * 2 + 3, stack * 2 + 1);
             }
         }
-        this.texCoords.push(0, 1, 0, 0);
-        //this.vertices.push(this.baseWidth / 2, this.height, 0);
-        //this.indices.push((this.stacks - 1) * 2, (this.stacks - 1) * 2 + 1, (this.stacks - 1) * 2 + 2);
-        console.log(this.vertices);
-        console.log(this.indices);
-        console.log(this.texCoords);
+
+        this.texCoords.push(0, 0.5);
+
+        this.vertices.push(this.baseWidth / 2, this.height, /*0*/Math.random() * 0.5);
+        this.indices.push((this.stacks - 1) * 2, (this.stacks - 1) * 2 + 1, (this.stacks - 1) * 2 + 2);
+        this.indices.push((this.stacks - 1) * 2 + 2, (this.stacks - 1) * 2 + 1, (this.stacks - 1) * 2);
+
+        //this.indices.push(0, 1, 6);
+        //console.log("Vertices: " + this.vertices.length / 3, this.vertices);
+        //console.log("Indices: " + this.indices.length / 3, this.indices);
+        //console.log(this.texCoords);
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }

@@ -58,7 +58,7 @@ export class MyScene extends CGFscene {
     //this.pollen = new MyPollen(this);
     this.rockset = new MyRockSet(this, 7, 4, './images/stone.jpg');
     //this.hive = new MyHive(this, 10, 0, 10);
-    //this.grassleaf = new MyGrassLeaf(this, 5);
+    this.grassleaf = new MyGrassLeaf(this, 3);
     this.lawn = new MyLawn(this);
 
     //Objects connected to MyInterface
@@ -129,7 +129,7 @@ export class MyScene extends CGFscene {
     this.translate(0, 0, 0);
     this.scale(400, 400, 400);
     this.rotate(-Math.PI / 2.0, 1, 0, 0);
-    this.plane.display();
+    //this.plane.display();
     this.popMatrix();
 
     this.panorama.display();
@@ -142,7 +142,7 @@ export class MyScene extends CGFscene {
     //this.bee.display();
     //this.hive.display();
 
-    this.rockset.display();
+    //this.rockset.display();
 
 
     //this.grassleaf.display();

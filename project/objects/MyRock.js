@@ -26,10 +26,10 @@ export class MyRock extends CGFobject {
     this.rock = new MySphereVariable(this.scene, this.slices, this.stacks, false, true);
 
 
-    console.log(this.rock.vertices);
-    console.log(this.rock.indices);
-    console.log(this.rock.texCoords);
-    console.log("Vertices: " + this.rock.vertices.length / 3 + "\nIndices: " + this.rock.indices.length / 3, "\nTextcoords: " + this.rock.texCoords.length / 2);
+    //console.log(this.rock.vertices);
+    //console.log(this.rock.indices);
+    //console.log(this.rock.texCoords);
+    //console.log("Vertices: " + this.rock.vertices.length / 3 + "\nIndices: " + this.rock.indices.length / 3, "\nTextcoords: " + this.rock.texCoords.length / 2);
   }
 
   initAppearance() {

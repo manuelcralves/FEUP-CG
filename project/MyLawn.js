@@ -6,10 +6,10 @@ export class MyLawn extends CGFobject {
         super(scene);
         this.grass = [];
         this.lawn_size = 500;
-        this.size = 50;
+        this.size = 100;
         this.texture = 'images/leaf.jpg';
 
-        let colorLeaf = [0, Math.random() * 0.8 + 0.1, 0];
+        let colorLeaf = [0, Math.random() * 0.8 + 0.5, 0];
         this.rTriangle = colorLeaf[0];
         this.gTriangle = colorLeaf[1];
         this.bTriangle = colorLeaf[2];
@@ -27,7 +27,7 @@ export class MyLawn extends CGFobject {
         for (let x = 0; x < this.size; x++) {
             this.grass[x] = [];
             for (let z = 0; z < this.size; z++) {
-                this.grass[x][z] = new MyGrassLeaf(scene, Math.random() * 4 + 1);
+                this.grass[x][z] = new MyGrassLeaf(scene, Math.floor(Math.random() * 4 + 2));
             }
         }
 
