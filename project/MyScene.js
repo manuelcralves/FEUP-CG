@@ -146,6 +146,8 @@ export class MyScene extends CGFscene {
 
 
     //this.grassleaf.display();
+    //this.setActiveShader(this.grassShader);
+    //this.pushMatrix();
     this.lawn.display();
 
 
@@ -159,7 +161,7 @@ export class MyScene extends CGFscene {
     if (this.previousTime != 0) {
       var deltaTime = t - this.previousTime;
       //this.bee.update(deltaTime);
-      this.lawn.update_lawn();
+      //this.lawn.update_lawn(deltaTime);
       //this.grassleaf.oscillate_leaf();
     }
     this.previousTime = t;

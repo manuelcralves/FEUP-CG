@@ -10,9 +10,7 @@ export class MyGrassLeaf extends CGFobject {
         this.height = Math.random() * 3 + 2;
         this.oscillation = 0;
 
-
         //this.shader = new CGFshader(this.gl, "shaders/grassleaf.vert", "shaders/grassleaf.frag");
-
 
         this.initBuffers();
     }
@@ -26,16 +24,11 @@ export class MyGrassLeaf extends CGFobject {
         let delta_height = this.height / this.stacks;
         let delta_width = (this.baseWidth + 0.05) / this.stacks;
 
-        //console.log("Width: " + this.baseWidth);
-        //console.log("Delta width: " + delta_width);
-
         for (var stack = 0; stack < this.stacks; stack++) {
-            this.vertices.push(delta_width / 2 * stack + Math.random() * 0.05, delta_height * stack, /*0);*/ Math.random() * 0.5);
-            this.vertices.push(this.baseWidth - delta_width / 2 * stack + Math.random() * 0.1, delta_height * stack, /*0);*/ Math.random() * 0.5);
+            this.vertices.push(delta_width / 2 * stack + Math.random() * 0.05, delta_height * stack, Math.random() * 0.5);
+            this.vertices.push(this.baseWidth - delta_width / 2 * stack + Math.random() * 0.1, delta_height * stack, Math.random() * 0.5);
             this.texCoords.push(1 - stack * (1 / this.stacks), 1);
             this.texCoords.push(1 - stack * (1 / this.stacks), 0);
-            /* this.vertices.push(delta_width * stack, delta_height * stack, this.thickness);
-            this.vertices.push(this.baseWidth - delta_width * stack, delta_height * stack, this.thickness); */
             if (stack < this.stacks - 1) {
                 this.indices.push(stack * 2, stack * 2 + 1, stack * 2 + 2);
                 this.indices.push(stack * 2 + 1, stack * 2 + 3, stack * 2 + 2);
@@ -46,14 +39,10 @@ export class MyGrassLeaf extends CGFobject {
 
         this.texCoords.push(0, 0.5);
 
-        this.vertices.push(this.baseWidth / 2, this.height, /*0*/Math.random() * 0.5);
+        this.vertices.push(this.baseWidth / 2, this.height, Math.random() * 0.5);
         this.indices.push((this.stacks - 1) * 2, (this.stacks - 1) * 2 + 1, (this.stacks - 1) * 2 + 2);
         this.indices.push((this.stacks - 1) * 2 + 2, (this.stacks - 1) * 2 + 1, (this.stacks - 1) * 2);
 
-        //this.indices.push(0, 1, 6);
-        //console.log("Vertices: " + this.vertices.length / 3, this.vertices);
-        //console.log("Indices: " + this.indices.length / 3, this.indices);
-        //console.log(this.texCoords);
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
