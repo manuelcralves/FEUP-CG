@@ -64,8 +64,8 @@ export class MyLawn extends CGFobject {
             for (let z = 0; z < this.size; z += 1) {//0.5) {
                     this.scene.pushMatrix();
                     this.appearance.apply();
-                    this.scene.translate(this.spacingX[x][z], 0, this.spacingZ[x][z]);
-                    //this.scene.translate(x /*+ Math.random() * 0.5*/, 0, z /*+ Math.random() * 0.5*/);
+                    //this.scene.translate(this.spacingX[x][z], 0, this.spacingZ[x][z]);
+                    this.scene.translate(x /*+ Math.random() * 0.5*/, 0, z /*+ Math.random() * 0.5*/);
                     this.grass[x][z].display();
                     this.scene.popMatrix();
             }
