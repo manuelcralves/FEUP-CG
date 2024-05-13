@@ -50,11 +50,12 @@ export class MyGrassLeaf extends CGFobject {
 
 
     oscillate_leaf() {
-        for (let vertice = 3; vertice < this.vertices.length; vertice++) {
-            if (this.oscillation == 0) { this.vertices[vertice] -= Math.random() * 0.5 + 0.1; }
-            else if (this.oscillation == 1) { this.vertices[vertice] += Math.random() * 0.5 + 0.1; }
+        for (let vertice = 12; vertice < this.vertices.length; vertice++) {
+            if (this.oscillation == 0) { this.vertices[vertice] -= Math.random() * 0.07 + 0.01; }
+            else if (this.oscillation == 1) { this.vertices[vertice] += Math.random() * 0.07 + 0.01; }
         }
         this.oscillation = this.oscillation === 0 ? 1 : 0;
+        this.initGLBuffers();
     }
 
 }

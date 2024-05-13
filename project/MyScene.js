@@ -149,6 +149,7 @@ export class MyScene extends CGFscene {
     //this.setActiveShader(this.grassShader);
     //this.pushMatrix();
     this.lawn.display();
+    this.setActiveShader(this.defaultShader);
 
 
     // ---- END Primitive drawing section
@@ -162,7 +163,14 @@ export class MyScene extends CGFscene {
       var deltaTime = t - this.previousTime;
       //this.bee.update(deltaTime);
       //this.lawn.update_lawn(deltaTime);
-      //this.grassleaf.oscillate_leaf();
+      let x_offset = Math.random() * 0.5 + 0.1;
+      let y_offset = Math.random() * 0.5 + 0.1;
+      let z_offset = Math.random() * 0.5 + 0.1;
+      this.lawn.lawnShader.setUniformsValues({ randomOffset1: x_offset });
+      this.lawn.lawnShader.setUniformsValues({ randomOffset2: y_offset });
+      this.lawn.lawnShader.setUniformsValues({ randomOffset3: z_offset });
+      this.lawn.lawnShader.setUniformsValues({timeFactor: t / 250 % 100});
+      this.grassleaf.oscillate_leaf();
     }
     this.previousTime = t;
     //this.checkKeys();

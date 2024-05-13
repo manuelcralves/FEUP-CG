@@ -5,6 +5,8 @@ export class MyLawn extends CGFobject {
     constructor(scene) {
         super(scene);
         this.grass = [];
+        this.spacingX = [];
+        this.spacingZ = [];
         this.lawn_size = 500;
         this.size = 50;
         this.texture = 'images/leaf.jpg';
@@ -25,50 +27,59 @@ export class MyLawn extends CGFobject {
 
 
         //Shaders
-        this.shaders = [];
-        /*     this.grassShader.setUniformsValues({ uSampler2: 1 });
-            this.grassShader.setUniformsValues({ timeFactor: 0 }); */
+        this.lawnShader = new CGFshader(this.scene.gl, "shaders/grassleaf.vert", "shaders/grassleaf.frag");
+        
+        let x_offset = Math.random() * 0.5 + 0.1;
+        let y_offset = Math.random() * 0.5 + 0.1;
+        let z_offset = Math.random() * 0.5 + 0.1;
+
+        this.lawnShader.setUniformsValues({ randomOffset1: x_offset });
+        this.lawnShader.setUniformsValues({ randomOffset2: y_offset });
+        this.lawnShader.setUniformsValues({ randomOffset3: z_offset });
+        this.lawnShader.setUniformsValues({ uSampler2: 1 });
+        this.lawnShader.setUniformsValues({ timeFactor: 0 });
 
 
-        for (let x = 0; x < this.size; x += 0.5) {
+        for (let x = 0; x < this.size; x += 1){ //0.5) {
             this.grass[x] = [];
-            this.shaders[x] = [];
-            for (let z = 0; z < this.size; z += 0.5) {
-                let x_offset = Math.random() * 0.5 + 0.1;
-                let y_offset = Math.random() * 0.5 + 0.1;
-                let z_offset = Math.random() * 0.5 + 0.1;
-                this.shaders[x][z] = new CGFshader(this.scene.gl, "shaders/grassleaf.vert");
-                this.shaders[x][z].setUniformsValues({ randomOffset1: x_offset });
-                this.shaders[x][z].setUniformsValues({ randomOffset2: y_offset });
-                this.shaders[x][z].setUniformsValues({ randomOffset3: z_offset });
+            this.spacingX[x] = [];
+            this.spacingZ[x] = [];
+            for (let z = 0; z < this.size; z += 1){ //0.5) {
                 this.grass[x][z] = new MyGrassLeaf(scene, Math.floor(Math.random() * 4 + 2));
+                this.spacingX[z] = x + Math.random() * 0.5;
+                this.spacingZ[z] = z + Math.random() * 0.5;
+        
             }
+        console.log("X at " + x + ": " + this.spacingX[x]);
+        console.log("Z at " + x + ": " + this.spacingZ[x]);
         }
+
+
 
     }
 
     display() {
-        for (let x = 0; x < this.size; x += 0.5) {
-            for (let z = 0; z < this.size; z += 0.5) {
-                {
+        this.scene.setActiveShader(this.lawnShader);
+        for (let x = 0; x < this.size; x += 1) {//0.5) {
+            for (let z = 0; z < this.size; z += 1) {//0.5) {
                     this.scene.pushMatrix();
                     this.appearance.apply();
-                    this.scene.translate(x /*+ Math.random() * 0.5*/, 0, z /*+ Math.random() * 0.5*/);
-                    //this.scene.setActiveShader(this.shaders[x][z]);
+                    this.scene.translate(this.spacingX[x][z], 0, this.spacingZ[x][z]);
+                    //this.scene.translate(x /*+ Math.random() * 0.5*/, 0, z /*+ Math.random() * 0.5*/);
                     this.grass[x][z].display();
                     this.scene.popMatrix();
-                }
             }
         }
     }
 
-    /*     update_lawn(t) {
-            if (t >= 60) {
-                for (let x = 0; x < this.size; x += 0.5) {
-                    for (let z = 0; z < this.size; z += 0.5) {
-                        this.grass[x][z].oscillate_leaf();
-                    }
+    //Unused
+    update_lawn(t) {
+        if (t >= 60) {
+            for (let x = 0; x < this.size; x += 1) {//0.5) {
+                for (let z = 0; z < this.size; z += 1){ //0.5) {
+                    this.grass[x][z].oscillate_leaf();
                 }
             }
-        } */
+        }
+    }
 }
