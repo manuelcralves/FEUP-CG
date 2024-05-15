@@ -277,6 +277,15 @@ goToHive(hive_x, hive_z) {
     // Stop the bee
     this.stop();
   }
+
+  if(this.velocity.y >= 0) {
+    this.vertical(-0.1);
+  }
+
+  if(Math.abs(2.5 - this.position.y) < 0.1) {
+    this.stop();
+  }
+
 }
 
 checkCollisions(garden) {
