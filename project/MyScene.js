@@ -53,13 +53,13 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panoramaTex);
     //let radius = Math.random() * (7 - 3) + 3;
     //this.flower = new MyFlower(this, radius, 6, [1.0, 0.0, 0.0], 1, [1.0, 1.0, 0.0], 0.25, 10, [0.0, 1.0, 0.0], [0.2, 0.4, 0.2], -Math.PI / 4, Math.PI / 4);
-    //this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
-    //this.bee = new MyBee(this, 0, 20, 0, 0);
+    this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
+    this.bee = new MyBee(this, -8, 5, -8, 0);
     //this.pollen = new MyPollen(this);
-    this.rockset = new MyRockSet(this, 7, 4, './images/stone.jpg');
-    //this.hive = new MyHive(this, 10, 0, 10);
-    this.grassleaf = new MyGrassLeaf(this, 3);
-    this.lawn = new MyLawn(this);
+    //this.rockset = new MyRockSet(this, 7, 4, './images/stone.jpg');
+    this.hive = new MyHive(this, -5, 0, -5, false);
+    //this.grassleaf = new MyGrassLeaf(this, 3);
+    //this.lawn = new MyLawn(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -137,10 +137,11 @@ export class MyScene extends CGFscene {
     //this.flower.display();
     //this.rock.display();
 
-    //this.garden.display();
+    this.garden.display();
 
-    //this.bee.display();
-    //this.hive.display();
+    this.bee.display();
+    
+    this.hive.display();
 
     //this.rockset.display();
 
@@ -161,7 +162,7 @@ export class MyScene extends CGFscene {
   update(t) {
     if (this.previousTime != 0) {
       var deltaTime = t - this.previousTime;
-      //this.bee.update(deltaTime);
+      this.bee.update(deltaTime);
       //this.lawn.update_lawn(deltaTime);
       let x_offset = Math.random() * 0.5 + 0.1;
       let y_offset = Math.random() * 0.5 + 0.1;
@@ -173,7 +174,7 @@ export class MyScene extends CGFscene {
       this.grassleaf.oscillate_leaf();
     }
     this.previousTime = t;
-    //this.checkKeys();
+    this.checkKeys();
     //console.log("Updated");
     //console.log(this.lawn.grass[3][3].vertices);
   }
@@ -220,8 +221,13 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyR")) {
       text += " R ";
       keysPressed = true;
-      this.bee = new MyBee(this, 0, 20, 0, 0);
+      this.bee = new MyBee(this, -10, 5, 0, 0);
       this.updateGarden();
+    } 
+    if (this.gui.isKeyPressed("KeyO")) {
+      text += " O ";
+      keysPressed = true;
+      this.bee.goToHive(-5, -5);
     }
     if (keysPressed)
       console.log(text);
