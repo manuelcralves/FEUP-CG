@@ -231,6 +231,54 @@ stop() {
   this.velocity.z = 0;
 }
 
+goToHive(hive_x, hive_z) {
+  const directionX = hive_x - this.position.x;
+  const directionZ = hive_z - this.position.z;
+  let directionToHive = Math.atan2(directionX, directionZ) / Math.PI + 0.5; // atan2 returns a value between -π and π
+
+  // Normalize directionToHive to be between 0 and 2
+  while(directionToHive < 0 || directionToHive >= 2) {
+    if(directionToHive < 0) {
+      directionToHive += 2;
+    } else {
+      directionToHive -= 2;
+    }
+  }
+  
+  var normalOrientation = this.orientation;
+
+  while(normalOrientation < 0 || normalOrientation >= 2) {
+    if(normalOrientation < 0) {
+      normalOrientation += 2;
+    } else {
+      normalOrientation -= 2;
+    }
+  }
+
+  var angle = directionToHive - normalOrientation;
+
+  // Adjust angle to take the shortest path
+  if (angle > 1) {
+    angle -= 2;
+  } else if (angle < -1) {
+    angle += 2;
+  }
+
+  this.turn(angle);
+
+  var velocityMagnitude = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.z * this.velocity.z);
+
+  if (velocityMagnitude < 0.1) {
+    this.accelerate(0.05);
+  }
+
+  // Check if bee is close to the hive
+  if (Math.abs(hive_x - this.position.x) < 0.1 && Math.abs(hive_z - this.position.z) < 0.1) {
+    // Stop the bee
+    this.stop();
+  }
+}
+
 checkCollisions(garden) {
   for (let i = 0; i < garden.rows; i++) {
       for (let j = 0; j < garden.cols; j++) {
@@ -258,7 +306,7 @@ checkCollisions(garden) {
            this.collideReceptacle = true;
         }
 
-        if(this.collideReceptacle && !this.grabbingPollen) {
+        if(this.collideReceptacle && !this.grabbingPollen && flower.hasPollen) {
           this.grabbingPollen = true;
           flower.hasPollen = false;
           return;
@@ -278,7 +326,7 @@ checkCollisions(garden) {
             this.collideReceptacle = true;
            }
 
-           if(this.collideReceptacle && !this.grabbingPollen) {
+           if(this.collideReceptacle && !this.grabbingPollen && flower.hasPollen) {
             this.grabbingPollen = true;
             flower.hasPollen = false;
             return;
