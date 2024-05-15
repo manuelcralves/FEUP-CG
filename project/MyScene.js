@@ -227,8 +227,16 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyO")) {
       text += " O ";
       keysPressed = true;
-      this.bee.goToHive(-5, -5);
-    }
+      var dropPollen = this.bee.goToHive(-5, -5);
+      if(this.bee.grabbingPollen && dropPollen) {
+          this.hive.hasPollen = true;
+          this.bee.grabbingPollen = false;
+          this.hive.display(); 
+      }
+      console.log(this.bee.grabbingPollen);
+      console.log(this.hive.hasPollen);
+      console.log(dropPollen);
+  }
     if (keysPressed)
       console.log(text);
   }

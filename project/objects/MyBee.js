@@ -272,20 +272,22 @@ goToHive(hive_x, hive_z) {
     this.accelerate(0.05);
   }
 
-  // Check if bee is close to the hive
-  if (Math.abs(hive_x - this.position.x) < 0.1 && Math.abs(hive_z - this.position.z) < 0.1) {
-    // Stop the bee
-    this.stop();
-  }
-
-  if(this.velocity.y >= 0) {
+  if(this.velocity.y >= 0 && this.position.y > 5) {
     this.vertical(-0.1);
   }
 
-  if(Math.abs(2.5 - this.position.y) < 0.1) {
+  if(Math.abs(3 - this.position.y) < 0.1) {
     this.stop();
+    return true;
   }
 
+  if (Math.abs(hive_x - this.position.x) < 0.1 && Math.abs(hive_z - this.position.z) < 0.1) {
+    // Stop the bee
+    this.stop();
+    return true;
+  }
+
+  return false;
 }
 
 checkCollisions(garden) {

@@ -4,7 +4,7 @@ import { MySphere } from '../primitives/MySphere.js';
 import { MyPollen } from './MyPollen.js';
 
 export class MyHive extends CGFobject {
-    constructor(scene, x, y, z, hasPollen=false) {
+    constructor(scene, x, y, z, hasPollen) {
         super(scene);
         this.position = { x: x, y: y, z: z };
         this.hasPollen = hasPollen;
