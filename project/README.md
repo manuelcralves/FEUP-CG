@@ -5,3 +5,5 @@
 ![Panorama View](project/screenshots/project-t04g11-2.png)
 
 ![Garden](project/screenshots/project-t04g11-3.png)
+
+![Bee](project/sceenshots/project-t04g11-5.png)
