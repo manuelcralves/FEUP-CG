@@ -5,8 +5,7 @@ export class MyLawn extends CGFobject {
     constructor(scene) {
         super(scene);
         this.grass = [];
-        this.spacingX = [];
-        this.spacingZ = [];
+        this.spacing = [];
         this.lawn_size = 500;
         this.size = 50;
         this.texture = 'images/leaf.jpg';
@@ -27,29 +26,27 @@ export class MyLawn extends CGFobject {
         //Shaders
         this.lawnShader = new CGFshader(this.scene.gl, "shaders/grassleaf.vert", "shaders/grassleaf.frag");
 
-        let x_offset = Math.random() * 0.5 + 0.1;
-        let y_offset = Math.random() * 0.5 + 0.1;
-        let z_offset = Math.random() * 0.5 + 0.1;
-
-        this.lawnShader.setUniformsValues({ randomOffset1: x_offset });
-        this.lawnShader.setUniformsValues({ randomOffset2: y_offset });
-        this.lawnShader.setUniformsValues({ randomOffset3: z_offset });
+        /*         let x_offset = Math.random() * 0.5 + 0.1;
+                let y_offset = Math.random() * 0.5 + 0.1;
+                let z_offset = Math.random() * 0.5 + 0.1; 
+        
+                  this.lawnShader.setUniformsValues({ randomOffset1: x_offset });
+                this.lawnShader.setUniformsValues({ randomOffset2: y_offset });
+                this.lawnShader.setUniformsValues({ randomOffset3: z_offset }); */
         this.lawnShader.setUniformsValues({ uSampler2: 1 });
         this.lawnShader.setUniformsValues({ timeFactor: 0 });
 
 
+        //Lawn generation
         for (let x = 0; x < this.size; x += 1) { //0.5) {
             this.grass[x] = [];
-            /*             this.spacingX[x] = [];
-                        this.spacingZ[x] = []; */
+            this.spacing[x] = [];
             for (let z = 0; z < this.size; z += 1) { //0.5) {
+                // Generate each individual leaf
                 this.grass[x][z] = new MyGrassLeaf(scene, Math.floor(Math.random() * 4 + 3));
-                /*                 this.spacingX[z] = x + Math.random() * 0.5;
-                                this.spacingZ[z] = z + Math.random() * 0.5; */
-
+                // Generate corresponding leaf's random position offset
+                this.spacing[x][z] = [x + Math.random() - 0.5, z + Math.random() - 0.5];
             }
-            /*             console.log("X at " + x + ": " + this.spacingX[x]);
-                        console.log("Z at " + x + ": " + this.spacingZ[x]); */
         }
 
     }
@@ -60,8 +57,7 @@ export class MyLawn extends CGFobject {
             for (let z = 0; z < this.size; z += 1) {//0.5) {
                 this.scene.pushMatrix();
                 this.appearance.apply();
-                //this.scene.translate(this.spacingX[x][z], 0, this.spacingZ[x][z]);
-                this.scene.translate(x /*+ Math.random() * 0.5*/, 0, z /*+ Math.random() * 0.5*/);
+                this.scene.translate(this.spacing[x][z][0], 0, this.spacing[x][z][1]);
                 this.grass[x][z].display();
                 this.scene.popMatrix();
             }
