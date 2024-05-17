@@ -56,10 +56,11 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
     this.bee = new MyBee(this, -8, 5, -8, 0);
     //this.pollen = new MyPollen(this);
-    //this.rockset = new MyRockSet(this, 7, 4, './images/stone.jpg');
+    this.rockset1 = new MyRockSet(this, 7, 8, './images/stone.jpg');
+    this.rockset2 = new MyRockSet(this, 7, 5, './images/stone.jpg');
+    this.rockset3 = new MyRockSet(this, 7, 6, './images/stone.jpg');
     this.hive = new MyHive(this, -5, 0, -5, false);
-    //this.grassleaf = new MyGrassLeaf(this, 3);
-    //this.lawn = new MyLawn(this);
+    this.lawn = new MyLawn(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -74,7 +75,9 @@ export class MyScene extends CGFscene {
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     this.setUpdatePeriod(1000 / 60.0);
-    this.previousTime = 0;
+
+    this.elapsedTime = 0;
+    this.modifier = 1;
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -129,28 +132,33 @@ export class MyScene extends CGFscene {
     this.translate(0, 0, 0);
     this.scale(400, 400, 400);
     this.rotate(-Math.PI / 2.0, 1, 0, 0);
-    //this.plane.display();
+    this.plane.display();
     this.popMatrix();
 
     this.panorama.display();
 
     //this.flower.display();
-    //this.rock.display();
-
-    this.garden.display();
+    //this.garden.display();
 
     this.bee.display();
-    
-    this.hive.display();
+    //this.hive.display();
 
-    //this.rockset.display();
+    this.pushMatrix()
+    this.scale(1.2, 1.2, 1.2)
+    this.translate(0, 0, 0);
+    this.rockset1.display();
+    this.translate(10, 0, -15);
+    this.rockset2.display();
+    this.translate(20, 0, 10);
+    this.rockset3.display();
+    this.popMatrix();
 
-
-    //this.grassleaf.display();
-    //this.setActiveShader(this.grassShader);
-    //this.pushMatrix();
-    //this.lawn.display();
-    //this.setActiveShader(this.defaultShader);
+    this.pushMatrix();
+    this.scale(0.5, 0.5, 0.5);
+    this.translate(-25, 0, -25);
+    this.lawn.display();
+    this.popMatrix();
+    this.setActiveShader(this.defaultShader);
 
 
     // ---- END Primitive drawing section
@@ -160,23 +168,29 @@ export class MyScene extends CGFscene {
     } */
 
   update(t) {
+    this.elapsedTime++;
+    /*     let x_offset = Math.random() * 0.5 + 0.1;
+        let y_offset = Math.random() * 0.5 + 0.1;
+        let z_offset = Math.random() * 0.5 + 0.1; */
+    let oscillation;
+    let cycle = 500 * this.modifier;
+
+    if (this.elapsedTime / cycle > 1) {
+      this.modifier = Math.random() + 0.5;
+      this.elapsedTime = 0;
+    }
+    oscillation = 0.1 * Math.sin(t / (500 * this.modifier));
+    /*     this.lawn.lawnShader.setUniformsValues({ randomOffset1: x_offset });
+        this.lawn.lawnShader.setUniformsValues({ randomOffset2: y_offset });
+        this.lawn.lawnShader.setUniformsValues({ randomOffset3: z_offset }); */
+    this.lawn.lawnShader.setUniformsValues({ timeFactor: oscillation });
+
     if (this.previousTime != 0) {
       var deltaTime = t - this.previousTime;
       this.bee.update(deltaTime);
-      //this.lawn.update_lawn(deltaTime);
-      /*let x_offset = Math.random() * 0.5 + 0.1;
-      let y_offset = Math.random() * 0.5 + 0.1;
-      let z_offset = Math.random() * 0.5 + 0.1;
-      this.lawn.lawnShader.setUniformsValues({ randomOffset1: x_offset });
-      this.lawn.lawnShader.setUniformsValues({ randomOffset2: y_offset });
-      this.lawn.lawnShader.setUniformsValues({ randomOffset3: z_offset });
-      this.lawn.lawnShader.setUniformsValues({timeFactor: t / 250 % 100});
-      this.grassleaf.oscillate_leaf();*/
     }
     this.previousTime = t;
     this.checkKeys();
-    //console.log("Updated");
-    //console.log(this.lawn.grass[3][3].vertices);
   }
 
   checkKeys() {
@@ -223,20 +237,20 @@ export class MyScene extends CGFscene {
       keysPressed = true;
       this.bee = new MyBee(this, -10, 5, 0, 0);
       this.updateGarden();
-    } 
+    }
     if (this.gui.isKeyPressed("KeyO")) {
       text += " O ";
       keysPressed = true;
       var dropPollen = this.bee.goToHive(-5, -5);
-      if(this.bee.grabbingPollen && dropPollen) {
-          this.hive.hasPollen = true;
-          this.bee.grabbingPollen = false;
-          this.hive.display(); 
+      if (this.bee.grabbingPollen && dropPollen) {
+        this.hive.hasPollen = true;
+        this.bee.grabbingPollen = false;
+        this.hive.display();
       }
       console.log(this.bee.grabbingPollen);
       console.log(this.hive.hasPollen);
       console.log(dropPollen);
-  }
+    }
     if (keysPressed)
       console.log(text);
   }

@@ -39,56 +39,8 @@ export class MyRockSet {
                 ang += delta_ang;
             }
             this.radius -= delta_radius;
-            scale -= (init_scale-0.1)/this.height;
+            scale -= (init_scale - 0.1) / this.height;
         }
-
-
-        /* for (let num = 0; num < rocks_size; num++) {
-            for (let y = 0; y < height; y++) {
-                for (let r = 0; r <radius; r++) {
-                    this.rocks[num] = 
-                }
-            }
-        } */
-        /*         for (let stack = 0; stack < this.height; stack++) {
-        
-                    const stackSize = this.base - stack;
-        
-                    // Calculate the offset for centering the layer
-                    const xOffset = (this.base - stackSize) / 2;
-        
-                    // Generate rock objects for the current layer
-                    for (let i = 0; i < stackSize; i++) {
-                        // Generate random position for the rock within the layer
-                        const x = i + xOffset;
-                        const y = stack / (this.height - 1); // Distribute height evenly across layers
-                        const z = stackSize / 2 - i; // Center the layer along the z-axis
-        
-                        // Create rock object and store it in the array
-                        const new_rock = new MyRock(this.scene, this.slices, this.stacks, x, y, z);
-                        this.rocks.push(new_rock);
-                    }
-                } */
-
-        /*         for (let stack = 0; stack < this.height; stack++) {
-        
-                    let stackSize = this.base - stack;
-        
-                    // Calculate the offset for centering the layer
-                    let xOffset = (this.base - stackSize) / 2;
-        
-                    // Generate rock objects for the current layer
-                    for (let i = 0; i < stackSize; i++) {
-                        // Generate random position for the rock within the layer
-                        let x = xOffset; //+i
-                        let z = stack / (this.height - 1);
-                        let y = stackSize / 2 - i;
-        
-                        // Create rock object and store it in the array
-                        const new_rock = new MyRock(this.scene, this.slices, this.stacks, x, y, z);
-                        this.rocks.push(new_rock);
-                    }
-                } */
     }
 
     display() {

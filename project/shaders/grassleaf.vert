@@ -20,10 +20,10 @@ void main() {
 
 	vec3 newPosition = aVertexPosition;
 	
-	float offset = 0.1*sin(timeFactor);
+	float offset = timeFactor;
 	
 	if (newPosition.y > 0.0) {
-	newPosition.x += offset*newPosition.y*newPosition.y*0.5;
+	//newPosition.x += offset*newPosition.y*newPosition.y*0.5;
 	newPosition.y += 0.0;
 	newPosition.z += offset*newPosition.y*newPosition.y*0.5;
 	}
