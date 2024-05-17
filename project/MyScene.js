@@ -56,6 +56,8 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
     this.bee = new MyBee(this, -8, 5, -8, 0);
     //this.pollen = new MyPollen(this);
+
+    this.rock = new MyRock(this, 7, 5, './images/stone.jpg', 0, 0, 0, 1);
     this.rockset1 = new MyRockSet(this, 7, 8, './images/stone.jpg');
     this.rockset2 = new MyRockSet(this, 7, 5, './images/stone.jpg');
     this.rockset3 = new MyRockSet(this, 7, 6, './images/stone.jpg');
@@ -140,32 +142,34 @@ export class MyScene extends CGFscene {
     //this.flower.display();
     //this.garden.display();
 
-    this.bee.display();
+    //this.bee.display();
     //this.hive.display();
 
+    this.rock.display();
+
     this.pushMatrix()
-    this.scale(1.2, 1.2, 1.2)
-    this.translate(0, 0, 0);
-    this.rockset1.display();
+    //this.scale(1.2, 1.2, 1.2)
+    //this.translate(0, 0, 0);
+    //this.rockset1.display();
     this.translate(10, 0, -15);
     this.rockset2.display();
     this.translate(20, 0, 10);
     this.rockset3.display();
     this.popMatrix();
 
-    this.pushMatrix();
-    this.scale(0.5, 0.5, 0.5);
-    this.translate(-25, 0, -25);
-    this.lawn.display();
-    this.popMatrix();
-    this.setActiveShader(this.defaultShader);
+    /*     this.pushMatrix();
+        this.scale(0.5, 0.5, 0.5);
+        this.translate(-25, 0, -25);
+        this.lawn.display();
+        this.popMatrix();
+        this.setActiveShader(this.defaultShader); */
 
 
     // ---- END Primitive drawing section
   }
-  /*   updateGarden() {
-      this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
-    } */
+  updateGarden() {
+    this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
+  }
 
   update(t) {
     this.elapsedTime++;
