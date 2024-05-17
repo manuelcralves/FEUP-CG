@@ -6,4 +6,4 @@
 
 ![Garden](project/screenshots/project-t04g11-3.png)
 
-![Bee](project/sceenshots/project-t04g11-5.png)
+![Bee](project/screenshots/project-t04g11-5.png)
