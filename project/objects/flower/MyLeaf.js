@@ -1,6 +1,6 @@
-import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
-import { MyCylinder } from '../primitives/MyCylinder.js';
-import { MyTriangle } from '../primitives/MyTriangle.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../../lib/CGF.js';
+import { MyCylinder } from '../../primitives/MyCylinder.js';
+import { MyTriangle } from '../../primitives/MyTriangle.js';
 
 export class MyLeaf extends CGFobject {
     constructor(scene, [rCylinder, gCylinder, bCylinder], [rTriangle, gTriangle, bTriangle]) {

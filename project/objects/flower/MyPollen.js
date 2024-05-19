@@ -1,5 +1,5 @@
-import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
-import { MySphere } from '../primitives/MySphere.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../../lib/CGF.js';
+import { MySphere } from '../../primitives/MySphere.js';
 
 export class MyPollen extends CGFobject {
     constructor(scene) {

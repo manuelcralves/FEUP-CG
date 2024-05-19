@@ -1,16 +1,11 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
-import { MyPanorama } from "./objects/MyPanorama.js";
+import { MyPanorama } from "./objects/panorama/MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MySphere } from "./primitives/MySphere.js";
-import { MyFlower } from "./objects/MyFlower.js";
-import { MyGarden } from "./MyGarden.js";
-import { MyBee } from "./objects/MyBee.js";
-import { MyPollen } from "./objects/MyPollen.js";
-import { MyRock } from "./objects/MyRock.js";
-import { MyRockSet } from "./MyRockSet.js";
-import { MyHive } from "./objects/MyHive.js";
-import { MyGrassLeaf } from "./objects/MyGrassLeaf.js";
-import { MyLawn } from "./MyLawn.js";
+import { MyGarden } from "./objects/garden/MyGarden.js";
+import { MyBee } from "./objects/bee/MyBee.js";
+import { MyHive } from "./objects/hive/MyHive.js";
+import { MyLawn } from "./objects/grass/MyLawn.js";
+import { MyRockSet } from "./objects/rock/MyRockSet.js";
 
 /**
  * MyScene

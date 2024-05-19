@@ -1,4 +1,4 @@
-import { MyFlower } from './objects/MyFlower.js';
+import { MyFlower } from '../flower/MyFlower.js';
 
 export class MyGarden {
   constructor(scene, rows, cols, spacing) {

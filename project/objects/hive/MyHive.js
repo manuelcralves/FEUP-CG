@@ -1,7 +1,6 @@
-import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
-import { MyQuad } from '../primitives/MyQuad.js';
-import { MySphere } from '../primitives/MySphere.js';
-import { MyPollen } from './MyPollen.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../../lib/CGF.js';
+import { MyQuad } from '../../primitives/MyQuad.js';
+import { MyPollen } from '../flower/MyPollen.js';
 
 export class MyHive extends CGFobject {
     constructor(scene, x, y, z, hasPollen) {

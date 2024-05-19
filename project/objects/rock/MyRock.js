@@ -1,5 +1,5 @@
-import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
-import { MySphereVariable } from '../primitives/MySphereVariable.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../../lib/CGF.js';
+import { MySphereVariable } from '../../primitives/MySphereVariable.js';
 
 export class MyRock extends CGFobject {
   constructor(scene, slices, stacks, texture, x = 0, y = 0, z = 0, scale) {

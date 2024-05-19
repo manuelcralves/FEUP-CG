@@ -1,4 +1,4 @@
-import { MyRock } from './objects/MyRock.js';
+import { MyRock } from './MyRock.js';
 
 export class MyRockSet {
     constructor(scene, slices, stacks, texture) {

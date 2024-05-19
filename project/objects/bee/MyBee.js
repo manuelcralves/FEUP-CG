@@ -1,14 +1,12 @@
-import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
-import { MyBeeBody } from './bee/MyBeeBody.js';
-import { MyBeeHead } from './bee/MyBeeHead.js';
-import { MyBeeAntenna } from './bee/MyBeeAntenna.js';
-import { MyBeeAntennaTop } from './bee/MyBeeAntennaTop.js';
-import { MyBeeFoot } from './bee/MyBeeFoot.js';
-import { MyBeeFootJoint } from './bee/MyBeeFootJoint.js';
-import { MyBeeWing } from './bee/MyBeeWing.js';
-import { MyGarden } from '../MyGarden.js';
-import { MyFlower } from './MyFlower.js';
-import { MyPollen } from './MyPollen.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../../lib/CGF.js';
+import { MyBeeBody } from './MyBeeBody.js';
+import { MyBeeHead } from './MyBeeHead.js';
+import { MyBeeAntenna } from './MyBeeAntenna.js';
+import { MyBeeAntennaTop } from './MyBeeAntennaTop.js';
+import { MyBeeFoot } from './MyBeeFoot.js';
+import { MyBeeFootJoint } from './MyBeeFootJoint.js';
+import { MyBeeWing } from './MyBeeWing.js';
+import { MyPollen } from '../flower/MyPollen.js';
 
 export class MyBee extends CGFobject {
   constructor(scene, x, y, z, orientation) {
