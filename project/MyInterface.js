@@ -25,9 +25,9 @@ export class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
 
-        let controllerRows = this.gui.add(this.scene, 'numRows', 1, 10).step(1).name('Number of Rows');
-        let controllerCols = this.gui.add(this.scene, 'numCols', 1, 10).step(1).name('Number of Columns');
-        let controllerSpacing = this.gui.add(this.scene, 'spacing', 1, 10).step(1).name('Spacing');
+        let controllerRows = this.gui.add(this.scene, 'numRows', 5, 5).step(1).name('Number of Rows');
+        let controllerCols = this.gui.add(this.scene, 'numCols', 5, 5).step(1).name('Number of Columns');
+        let controllerSpacing = this.gui.add(this.scene, 'spacing', 10, 10).step(1).name('Spacing');
 
         controllerRows.onChange(() => {
             this.scene.updateGarden();

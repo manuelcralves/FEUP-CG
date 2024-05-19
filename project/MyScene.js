@@ -54,14 +54,14 @@ export class MyScene extends CGFscene {
     //let radius = Math.random() * (7 - 3) + 3;
     //this.flower = new MyFlower(this, radius, 6, [1.0, 0.0, 0.0], 1, [1.0, 1.0, 0.0], 0.25, 10, [0.0, 1.0, 0.0], [0.2, 0.4, 0.2], -Math.PI / 4, Math.PI / 4);
     this.garden = new MyGarden(this, this.numRows, this.numCols, this.spacing);
-    this.bee = new MyBee(this, 15, 7, 8, 0);
+    this.bee = new MyBee(this, 15, 13, -10, 0);
     //this.pollen = new MyPollen(this);
 
     //this.rock = new MyRock(this, 7, 5, './images/stone.jpg', 0, 0, 0, 1);
     this.rockset1 = new MyRockSet(this, 7, 8, './images/stone.jpg');
     this.rockset2 = new MyRockSet(this, 7, 5, './images/stone.jpg');
     this.rockset3 = new MyRockSet(this, 7, 6, './images/stone.jpg');
-    this.hive = new MyHive(this, 15, 0.1, 8, false);
+    this.hive = new MyHive(this, 15, 0.1, -10, false);
     this.lawn = new MyLawn(this);
 
     //Objects connected to MyInterface
@@ -95,14 +95,14 @@ export class MyScene extends CGFscene {
       1.5,
       0.1,
       1000,
-      vec3.fromValues(0, 5, 0),
-      vec3.fromValues(10, 0, 10)
+      vec3.fromValues(10, 17, -15),
+      vec3.fromValues(15, 13, -10)
     );
   }
   setDefaultAppearance() {
-    this.setAmbient(0.2, 0.4, 0.8, 1.0);
-    this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-    this.setSpecular(0.2, 0.4, 0.8, 1.0);
+    this.setAmbient(0.2, 0.4, 0.8, 0.4);
+    this.setDiffuse(0.2, 0.4, 0.8, 0.4);
+    this.setSpecular(0.2, 0.4, 0.8, 0.4);
     this.setShininess(10.0);
   }
   display() {
@@ -134,8 +134,8 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.appearance.apply();
-    this.translate(0, 0, 0);
-    this.scale(400, 400, 400);
+    this.translate(20, 0, 20);
+    this.scale(200, 200, 200);
     this.rotate(-Math.PI / 2.0, 1, 0, 0);
     this.plane.display();
     this.popMatrix();
@@ -151,17 +151,17 @@ export class MyScene extends CGFscene {
     //this.rock.display();
 
     this.pushMatrix()
-    this.translate(5, 0, 55);
+    this.translate(30, 0, -10);
     this.rockset1.display();
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(35, 0, 40);
+    this.translate(45, 0, -15);
     this.rockset2.display();
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(15, 0, 15);
+    this.translate(15, 0, -20);
     this.rockset3.display();
     this.popMatrix(); 
 
@@ -246,14 +246,15 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyR")) {
       text += " R ";
       keysPressed = true;
-      this.bee = new MyBee(this, 15, 7, 8, 0);
+      this.bee = new MyBee(this, 15, 13, -10, 0);
       //this.updateGarden();
     }
     if (this.gui.isKeyPressed("KeyO")) {
       text += " O ";
       keysPressed = true;
-      var dropPollen = this.bee.goToHive(15, 8);
-      if (this.bee.grabbingPollen && dropPollen) {
+      var dropPollen = this.bee.goToHive(15, -10);
+      if (this.bee.grabbingPollen && dropPollen && this.bee.position.y < 5) {
+        this.bee.stop();
         this.hive.hasPollen = true;
         this.bee.grabbingPollen = false;
         this.hive.display();

@@ -17,7 +17,7 @@ export class MyGarden {
       let radiusReceptacle = Math.random() * (1-0.7) + 0.7; 
       let colorReceptacle = [Math.random(), Math.random(), Math.random()];
       let radiusStem = Math.random() * (0.3-0.1) + 0.1; 
-      let heightStem = Math.random() * (20-2) + 5; 
+      let heightStem = Math.random() * (15-2) + 2; 
       let colorStem = [0, Math.random()*(1-0.3)+0.2, 0];
       let colorLeaf = [0, Math.random()*(0.4-0.1) +0.1, 0];
       let minTilt = Math.random() * (-Math.PI/4);

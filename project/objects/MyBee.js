@@ -264,7 +264,10 @@ goToHive(hive_x, hive_z) {
     angle += 2;
   }
 
-  this.turn(angle);
+  if (Math.abs(hive_x - this.position.x) > 0.1 && Math.abs(hive_z - this.position.z) > 0.1) {
+    // Stop the bee
+    this.turn(angle);
+  }
 
   var velocityMagnitude = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.z * this.velocity.z);
 
@@ -276,14 +279,13 @@ goToHive(hive_x, hive_z) {
     this.vertical(-0.1);
   }
 
-  if(Math.abs(3 - this.position.y) < 0.1) {
-    this.stop();
+  if(3 - this.position.y < 0.1) {
     return true;
   }
 
   if (Math.abs(hive_x - this.position.x) < 0.1 && Math.abs(hive_z - this.position.z) < 0.1) {
     // Stop the bee
-    this.stop();
+    this.vertical(-0.1);
     return true;
   }
 
@@ -311,7 +313,7 @@ checkCollisions(garden) {
               Math.pow(this.position.z - j*garden.spacing, 2)
           );
 
-          if (distanceFlower < flower.radiusReceptacle+1) {
+          if (distanceFlower < flower.radiusReceptacle+ 0.1) {
             console.log("Colllide Receptacle");
            this.collision = true;
            this.collideReceptacle = true;
@@ -330,7 +332,7 @@ checkCollisions(garden) {
               Math.pow(this.position.z - j*garden.spacing, 2)
           );
 
-          if (distanceFlower < flower.radiusFlower + 1) {
+          if (distanceFlower < flower.radiusFlower + 0.1) {
             console.log("Collide Flower");
            this.collision = true;
            if(this.velocity.y < 0) {
@@ -345,6 +347,12 @@ checkCollisions(garden) {
         }
           }
       }
+  }
+
+  if(this.position.y < 3) {
+    this.velocity.y = 0;
+    this.position.y = 3.1;
+    return;
   }
 }
 }
